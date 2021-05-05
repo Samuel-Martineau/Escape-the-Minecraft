@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["dom", "esnext"]
+  },
+  "include": ["src/**/*.js", "lib/**/*.js"]
+}

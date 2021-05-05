@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Samuel</title>
+  </head>
+  <body>
+    <main>
+      <div id="slides">
+        <!-- Défi 1 -->
+        <div class="slide">
+          <img src="./images/slides/1.png" />
+          <img
+            src="./images/textures/water_bucket.png"
+            id="c1-bucket"
+            draggable="true"
+            style="cursor: grab"
+          />
+          <div id="c1-fire-dropzone"></div>
+        </div>
+        <!-- Défi 2 -->
+        <div class="slide" style="--lighten: 50">
+          <img src="./images/slides/2.0.jpg" class="lighten" />
+          <img src="./images/slides/2.1.png" id="c2-lever-0" class="hidden" />
+          <img src="./images/slides/2.2.png" id="c2-lever-1" class="hidden" />
+          <img src="./images/slides/2.3.png" id="c2-lever-2" class="hidden" />
+          <img src="./images/slides/2.4.png" id="c2-lever-3" class="hidden" />
+        </div>
+        <!-- Transition -->
+        <div class="slide">
+          <img src="./images/slides/3.png" />
+        </div>
+        <!-- Défi 3 -->
+        <div class="slide">
+          <img src="./images/slides/4.0.png" />
+          <img
+            src="./images/textures/corals/blue.png"
+            class="c3-item transparent"
+            draggable="true"
+          />
+          <img
+            src="./images/textures/corals/pink.png"
+            class="c3-item transparent"
+            draggable="true"
+          />
+          <img
+            src="./images/textures/corals/magenta.png"
+            class="c3-item transparent"
+            draggable="true"
+          />
+          <img
+            src="./images/textures/corals/red.png"
+            class="c3-item transparent"
+            draggable="true"
+          />
+          <img
+            src="./images/textures/corals/yellow.png"
+            class="c3-item transparent"
+            draggable="true"
+          />
+          <img
+            src="./images/slides/4.1.png"
+            data-answer="0234"
+            id="c4-inventory-0"
+            class="hidden"
+          />
+          <div class="c3-dropzone"></div>
+          <div class="c3-dropzone"></div>
+          <div class="c3-dropzone"></div>
+          <div class="c3-dropzone"></div>
+          <img
+            src="./images/slides/4.2.png"
+            data-answer="0423"
+            id="c4-inventory-1"
+            class="hidden"
+          />
+          <img
+            src="./images/slides/4.3.png"
+            data-answer="3124"
+            id="c4-inventory-2"
+            class="hidden"
+          />
+          <img
+            src="./images/slides/4.4.png"
+            data-answer="2413"
+            id="c4-inventory-3"
+            class="hidden"
+          />
+        </div>
+        <!-- Animation de fin P1 -->
+        <div class="slide">
+          <img src="./images/slides/5.png" />
+        </div>
+        <!-- Animation de fin P2 -->
+        <div class="slide">
+          <img src="./images/slides/6.png" />
+        </div>
+        <!-- Animation de fin P3 -->
+        <div class="slide">
+          <img src="./images/slides/7.png" />
+        </div>
+        <!-- Animation de fin P4 -->
+        <div class="slide">
+          <img src="./images/slides/8.png" />
+        </div>
+        <!-- Animation de fin P5 -->
+        <div class="slide">
+          <img src="./images/slides/9.png" />
+        </div>
+        <!-- Animation de fin P6 -->
+        <div class="slide" style="--lighten: 0">
+          <video src="./images/slides/10.mp4" />
+        </div>
+      </div>
+    </main>
+    <script src="./src/main.js" type="module"></script>
+  </body>
+</html>

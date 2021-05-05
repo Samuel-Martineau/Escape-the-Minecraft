@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Escape the Minecraft</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        box-sizing: border-box;
+        background-color: white;
+      }
+
+      body {
+        padding: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: "Montserrat", sans-serif;
+        color: white;
+        background: rgba(0, 0, 0, 0.65) url(./images/dirt.png);
+        background-blend-mode: darken;
+        background-size: 80px;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+      }
+
+      main {
+        width: min(100%, 100vh);
+      }
+
+      #iframe-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+      }
+
+      iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+      }
+
+      details {
+        text-align: center;
+      }
+
+      summary {
+        user-select: none;
+      }
+
+      hr {
+        width: 15vw;
+        border: none;
+        border-top: 5px dotted lightgray;
+        margin: 25px 0;
+      }
+
+      #timer {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="timer"></h1>
+
+    <h1>Escape the Minecraft</h1>
+
+    <hr />
+
+    <details open>
+      <summary><b>Instructions</b></summary>
+      <span>Test</span>
+    </details>
+
+    <hr />
+
+    <b>Jeu de <span id="name"></span></b>
+    <main>
+      <br />
+      <div id="iframe-wrapper">
+        <iframe src="" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+    </main>
+    <script>
+      const iframe = document.querySelector("iframe");
+      const nameSpan = document.querySelector("#name");
+      const timer = document.querySelector("#timer");
+
+      let time = 45 * 60;
+
+      setInterval(() => {
+        if (time <= 0) {
+          showDefeat();
+        } else {
+          time--;
+
+          let seconds = time % 60;
+          let minutes = (time - seconds) / 60;
+
+          timer.textContent = `${minutes.toLocaleString("fr-ca", {
+            minimumIntegerDigits: 2,
+          })}:${seconds.toLocaleString("fr-ca", {
+            minimumIntegerDigits: 2,
+          })}`;
+        }
+      }, 1000);
+
+      const people = [
+        {
+          name: "Mathieu Guimond",
+          game: "./mathieu/index.html",
+        },
+        {
+          name: "Samuel Martineau",
+          game: "./samuel/index.html",
+        },
+      ];
+      let index = -1;
+
+      function nextPerson() {
+        const person = people[++index];
+        iframe.src = person.game;
+        nameSpan.textContent = person.name;
+      }
+
+      function showDefeat() {
+        index = -1;
+        iframe.src = "./end.html?screen=defeat";
+        nameSpan.textContent = "TOUS";
+      }
+
+      function showVictory() {
+        index = -1;
+        iframe.src = "./end.html?screen=victory";
+        nameSpan.textContent = "TOUS";
+      }
+
+      nextPerson();
+    </script>
+  </body>
+</html>
