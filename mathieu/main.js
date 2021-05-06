@@ -4,12 +4,13 @@ var paper3 = document.getElementById("paper3");
 var npc1 = document.getElementById("npc1");
 var npc2 = document.getElementById("npc2");
 var npc3 = document.getElementById("npc3");
+var paper1center;
 
 function paper1Appear() {
   npc1.style.display = "none";
   paper1.style.display = "block";
 
-  var paper1center = setInterval(paper1ToMidlle(), 10);
+  paper1center = setInterval(paper1ToMidlle(), 10);
 }
 
 function paper2Appear() {
