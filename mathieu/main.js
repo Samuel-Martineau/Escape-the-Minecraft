@@ -13,12 +13,12 @@ function paper1Appear() {
   npc1.style.display = "none";
   paper1.style.display = "block";
 
-  paper1center = setInterval(paper1ToMiddle, 10);
+  var paper1center = setInterval(paper1ToMiddle, 10);
 
   counter1 = 0;
 
   setTimeout(function () {
-    paper1bottom = setInterval(paper1ToBottom, 10);
+    var paper1bottom = setInterval(paper1ToBottom, 10);
   }, 2000);
 }
 
@@ -62,6 +62,6 @@ function paper1ToBottom() {
   paper1.style.width = width1 + "%";
 
   if (counter1 == 100) {
-    clearInterval(paper1bottom);
+    clearInterval();
   }
 }
