@@ -27,3 +27,26 @@ body {
   right: 34.2%;
   top: 45%;
 }
+
+.paper {
+  position: absolute;
+  width: 3%;
+  height: 3%;
+  display: none;
+  transition: 3s;
+}
+
+.paper1 {
+  left: 35%;
+  top: 44%;
+}
+
+.paper2 {
+  left: 35%;
+  top: 44%;
+}
+
+.paper3 {
+  left: 35%;
+  top: 44%;
+}
