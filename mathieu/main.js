@@ -19,8 +19,8 @@ function paper1Appear() {
 
   counter1 = 0;
 
-  setTimeout(function () {
-    paper1bottom = setInterval(paper1ToBottom, 10);
+  paper1bottom = setTimeout(function () {
+    setInterval(paper1ToBottom, 10);
   }, 2000);
 }
 
