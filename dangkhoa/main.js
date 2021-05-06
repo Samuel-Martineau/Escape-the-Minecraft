@@ -1,11 +1,11 @@
-import { Frame } from './modules/Frame.js';
+import { Frame } from "./modules/Frame.js";
 
-const HTMLFrame = document.querySelector('.frame');
+const HTMLFrame = document.querySelector(".frame");
 const framesList = {
-  0: new Frame('0.png'),
-  1: new Frame('1.png'),
-  2: new Frame('2.png'),
-  3: new Frame('3.png'),
+  0: new Frame("0.png"),
+  1: new Frame("1.png"),
+  2: new Frame("2.png"),
+  3: new Frame("3.png"),
 };
 
 let currentFrameIndex = 0;

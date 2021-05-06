@@ -1,6 +1,51 @@
 import { areArraysEqual, distance } from "./utils.js";
 
 /**
+ * @param {number} delay
+ * @returns {SlideController}
+ */
+const automaticSlideController = (delay) => ({
+  data: {},
+  state: {},
+  onInit() {},
+  onShow({ slidesManager }) {
+    this.state.timeout = setTimeout(
+      slidesManager.next.bind(slidesManager),
+      delay
+    );
+  },
+  onHide() {
+    clearTimeout(this.state.timeout);
+  },
+  onClick() {},
+  onMove() {},
+});
+
+/**
+ * @returns {SlideController}
+ */
+const videoSlideController = () => ({
+  data: {},
+  state: {},
+  onInit({ slideElement, slidesManager }) {
+    slideElement
+      .querySelector("video")
+      // @ts-ignore
+      .addEventListener("ended", slidesManager.next.bind(slidesManager));
+  },
+  onShow({ slideElement }) {
+    const video = slideElement.querySelector("video");
+    video.currentTime = 0;
+    video.play();
+  },
+  onHide({ slideElement }) {
+    slideElement.querySelector("video").pause();
+  },
+  onClick() {},
+  onMove() {},
+});
+
+/**
  * @type {SlideController[]}
  */
 export const slideControllers = [
@@ -145,22 +190,7 @@ export const slideControllers = [
     },
   },
   // Transition
-  {
-    data: {},
-    state: {},
-    onInit() {},
-    onShow({ slidesManager }) {
-      this.state.timeout = setTimeout(
-        slidesManager.next.bind(slidesManager),
-        1000
-      );
-    },
-    onHide() {
-      clearTimeout(this.state.timeout);
-    },
-    onClick() {},
-    onMove() {},
-  },
+  automaticSlideController(500),
   // Défi 3 -> Se souvenir de la combinaison affichée
   {
     data: {
@@ -224,7 +254,9 @@ export const slideControllers = [
         },
       ],
     },
-    state: {},
+    state: {
+      guess: [],
+    },
     onInit({ slideElement, slidesManager }) {
       /**
        * @type {HTMLImageElement[]}
@@ -274,14 +306,17 @@ export const slideControllers = [
         );
       }
 
-      for (const dropzoneDiv of dropzoneDivs) {
+      for (const [index, dropzoneDiv] of dropzoneDivs.entries()) {
         dropzoneDiv.addEventListener("drop", (e) => {
           e.preventDefault();
 
           const itemIndex = parseInt(e.dataTransfer.getData("text"));
 
           dropzoneDiv.style.backgroundImage = `url(${itemImages[itemIndex].src})`;
-          console.log(`url(${itemImages[itemIndex].src})`);
+
+          this.state.guess[index] = itemIndex;
+          if (this.state.guess.join("") === this.state.answer)
+            slidesManager.next();
         });
 
         dropzoneDiv.addEventListener("dragover", (e) => {
@@ -309,9 +344,24 @@ export const slideControllers = [
         );
         inventory.classList.remove("hidden");
 
+        /**
+         * @type {HTMLImageElement[]}
+         */
         const itemImages = Array.from(document.querySelectorAll("img.c3-item"));
+        /**
+         * @type {HTMLDivElement[]}
+         */
+        const dropzoneDivs = Array.from(
+          document.querySelectorAll("div.c3-dropzone")
+        );
+
         for (const itemImage of itemImages)
           itemImage.setAttribute("draggable", "false");
+
+        for (const dropzoneDiv of dropzoneDivs)
+          dropzoneDiv.style.backgroundImage = "";
+
+        this.state.guess = [];
 
         this.state.isInventoryOpen = true;
         this.state.answer = inventory.getAttribute("data-answer");
@@ -327,71 +377,26 @@ export const slideControllers = [
     onMove() {},
   },
   // Animation de fin P1
-  {
-    data: {},
-    state: {},
-    onInit() {},
-    onShow() {},
-    onHide() {},
-    onClick() {},
-    onMove() {},
-  },
+  automaticSlideController(500),
   // Animation de fin P2
-  {
-    data: {},
-    state: {},
-    onInit() {},
-    onShow() {},
-    onHide() {},
-    onClick() {},
-    onMove() {},
-  },
+  automaticSlideController(500),
   // Animation de fin P3
-  {
-    data: {},
-    state: {},
-    onInit() {},
-    onShow() {},
-    onHide() {},
-    onClick() {},
-    onMove() {},
-  },
+  automaticSlideController(500),
   // Animation de fin P4
-  {
-    data: {},
-    state: {},
-    onInit() {},
-    onShow() {},
-    onHide() {},
-    onClick() {},
-    onMove() {},
-  },
+  automaticSlideController(500),
   // Animation de fin P5
+  automaticSlideController(500),
+  // Animation de fin P6
+  videoSlideController(),
   {
     data: {},
     state: {},
     onInit() {},
-    onShow() {},
+    onShow() {
+      // @ts-ignore
+      window.parent.nextPerson();
+    },
     onHide() {},
-    onClick() {},
-    onMove() {},
-  },
-  // Animation de fin P6
-  {
-    data: {},
-    state: {},
-    onInit({ slideElement }) {
-      slideElement
-        .querySelector("video")
-        // @ts-ignore
-        .addEventListener("ended", () => window.next());
-    },
-    onShow({ slideElement }) {
-      slideElement.querySelector("video").play();
-    },
-    onHide({ slideElement }) {
-      slideElement.querySelector("video").pause();
-    },
     onClick() {},
     onMove() {},
   },
