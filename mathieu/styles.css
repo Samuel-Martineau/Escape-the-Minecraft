@@ -15,25 +15,24 @@ body {
 
 .npc1 {
   left: 34%;
-  top: 45%;
+  top: 40%;
 }
 
 .npc2 {
   left: 47.5%;
-  top: 45%;
+  top: 40%;
 }
 
 .npc3 {
   right: 34.2%;
-  top: 45%;
+  top: 40%;
 }
 
 .paper {
   position: absolute;
   width: 3%;
-  height: 3%;
+  height: auto;
   display: none;
-  transition: 3s;
 }
 
 .paper1 {
