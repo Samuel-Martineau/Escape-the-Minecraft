@@ -9,7 +9,7 @@ function paper1Appear() {
   npc1.style.display = "none";
   paper1.style.display = "block";
 
-  var paper1center = setInterval(paper1ToMidlle, 10);
+  var paper1center = setInterval(paper1ToMidlle(), 10);
 }
 
 function paper2Appear() {
