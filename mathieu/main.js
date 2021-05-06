@@ -8,8 +8,6 @@ var npc3 = document.getElementById("npc3");
 function paper1Appear() {
   npc1.style.display = "none";
   paper1.style.display = "block";
-  paper1.style.left = "48%";
-  paper1.style.top = "47%";
 
   var paper1center = setInterval(paper1ToMidlle, 10);
 }
