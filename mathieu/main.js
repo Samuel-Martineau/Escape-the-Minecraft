@@ -17,9 +17,7 @@ function paper1Appear() {
 
   counter1 = 0;
 
-  paper1bottom = setTimeout(function () {
-    setInterval(paper1ToBottom, 10);
-  }, 2000);
+  setTimeout(paper1Interval, 2000);
 }
 
 function paper2Appear() {
@@ -49,6 +47,10 @@ function paper1ToMiddle() {
   if (counter1 == 100) {
     clearInterval(paper1center);
   }
+}
+
+function paper1Interval() {
+  paper1bottom = setInterval(paper1ToBottom, 10);
 }
 
 function paper1ToBottom() {
