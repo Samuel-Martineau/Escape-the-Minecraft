@@ -4,8 +4,6 @@ var paper3 = document.getElementById("paper3");
 var npc1 = document.getElementById("npc1");
 var npc2 = document.getElementById("npc2");
 var npc3 = document.getElementById("npc3");
-var paper1center;
-var paper1bottom;
 var left1 = 35;
 var top1 = 44;
 var width1 = 3;
