@@ -5,6 +5,10 @@ var npc1 = document.getElementById("npc1");
 var npc2 = document.getElementById("npc2");
 var npc3 = document.getElementById("npc3");
 var paper1center;
+var left1 = 35;
+var top1 = 44;
+var width1 = 3;
+var counter1 = 0;
 
 function paper1Appear() {
   npc1.style.display = "none";
@@ -28,11 +32,6 @@ function paper3Appear() {
 }
 
 function paper1ToMiddle() {
-  var left1 = 35;
-  var top1 = 44;
-  var width1 = 3;
-  var counter1 = 0;
-
   left1 = left1 + 0.13;
   top1 = top1 + 0.03;
   width1 = width1 + 0.1;
