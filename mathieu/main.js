@@ -15,6 +15,8 @@ function paper1Appear() {
 
   paper1center = setInterval(paper1ToMiddle, 10);
 
+  counter1 = 0;
+
   setTimeout(function () {
     paper1bottom = setInterval(paper1ToBottom, 10);
   }, 2000);
@@ -50,8 +52,6 @@ function paper1ToMiddle() {
 }
 
 function paper1ToBottom() {
-  counter1 = 0;
-
   left1 = left1 - 0.05;
   top1 = top1 + 0.56;
   width1 = width1 - 0.03;
