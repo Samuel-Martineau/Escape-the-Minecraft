@@ -17,7 +17,7 @@ function paper1Appear() {
 
   setTimeout(function () {
     paper1bottom = setInterval(paper1ToBottom, 10);
-  }, 1000);
+  }, 2000);
 }
 
 function paper2Appear() {
@@ -53,7 +53,7 @@ function paper1ToBottom() {
   counter1 = 0;
 
   left1 = left1 - 0.05;
-  top1 = top1 - 0.56;
+  top1 = top1 + 0.56;
   width1 = width1 - 0.03;
   counter1 = counter1 + 1;
 
