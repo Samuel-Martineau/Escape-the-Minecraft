@@ -31,8 +31,8 @@ function paper3Appear() {
 }
 
 function paper1ToMiddle() {
-  left1 = left1 + 0.1;
-  top1 = top1;
+  left1 = left1 + 0.06;
+  top1 = top1 - 0.04;
   width1 = width1 + 0.1;
   counter1 = counter1 + 1;
 
