@@ -1,0 +1,29 @@
+body {
+  background-image: url(Images/firstLevel.png);
+
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.npc {
+  position: absolute;
+  width: 5%;
+  height: 22%;
+  cursor: pointer;
+}
+
+.npc1 {
+  left: 34%;
+  top: 45%;
+}
+
+.npc2 {
+  left: 47.5%;
+  top: 45%;
+}
+
+.npc3 {
+  right: 34.2%;
+  top: 45%;
+}
