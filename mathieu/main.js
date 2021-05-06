@@ -64,6 +64,6 @@ function paper1ToBottom() {
   paper1.style.width = width1 + "%";
 
   if (counter1 == 100) {
-    clearInterval();
+    clearInterval(paper1bottom);
   }
 }
