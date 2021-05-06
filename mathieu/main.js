@@ -4,7 +4,6 @@ var paper3 = document.getElementById("paper3");
 var npc1 = document.getElementById("npc1");
 var npc2 = document.getElementById("npc2");
 var npc3 = document.getElementById("npc3");
-var paper1center;
 var left1 = 35;
 var top1 = 44;
 var width1 = 3;
@@ -14,7 +13,7 @@ function paper1Appear() {
   npc1.style.display = "none";
   paper1.style.display = "block";
 
-  paper1center = setInterval(paper1ToMiddle(), 10);
+  paper1center = setInterval(paper1ToMiddle, 10);
 }
 
 function paper2Appear() {
