@@ -4,10 +4,13 @@ var paper3 = document.getElementById("paper3");
 var npc1 = document.getElementById("npc1");
 var npc2 = document.getElementById("npc2");
 var npc3 = document.getElementById("npc3");
+var paper1center;
+var paper1bottom;
 var left1 = 35;
 var top1 = 44;
 var width1 = 3;
 var counter1 = 0;
+var counter2 = 0;
 
 function paper1Appear() {
   npc1.style.display = "none";
@@ -15,13 +18,9 @@ function paper1Appear() {
 
   paper1center = setInterval(paper1ToMiddle, 10);
 
-  counter1 = 0;
-
   setTimeout(function () {
-    console.log(counter1);
+    paper1bottom = setInterval(paper1ToBottom, 10);
   }, 2000);
-
-  paper1bottom = setInterval(paper1ToBottom, 10);
 }
 
 function paper2Appear() {
@@ -57,13 +56,13 @@ function paper1ToBottom() {
   left1 = left1 - 0.05;
   top1 = top1 + 0.56;
   width1 = width1 - 0.03;
-  counter1 = counter1 + 1;
+  counter2 = counter2 + 1;
 
   paper1.style.left = left1 + "%";
   paper1.style.top = top1 + "%";
   paper1.style.width = width1 + "%";
 
-  if (counter1 == 100) {
+  if (counter2 == 100) {
     clearInterval(paper1bottom);
   }
 }
