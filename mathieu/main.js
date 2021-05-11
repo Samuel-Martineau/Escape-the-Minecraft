@@ -55,8 +55,8 @@ function paper1ToMiddle() {
 }
 
 function paper1ToBottom() {
-  left1 = left1 - 0.08;
-  top1 = top1 + 0.5;
+  left1 = left1 - 0.12;
+  top1 = top1 + 0.45;
   width1 = width1 - 0.03;
   bottomCounter1 = bottomCounter1 + 1;
 
