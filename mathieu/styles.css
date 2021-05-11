@@ -15,17 +15,17 @@ body {
 
 .npc1 {
   left: 34%;
-  top: 40%;
+  top: 38%;
 }
 
 .npc2 {
   left: 47.5%;
-  top: 40%;
+  top: 38%;
 }
 
 .npc3 {
   right: 34.2%;
-  top: 40%;
+  top: 38%;
 }
 
 .paper {
@@ -41,11 +41,11 @@ body {
 }
 
 .paper2 {
-  left: 35%;
+  left: 49%;
   top: 44%;
 }
 
 .paper3 {
-  left: 35%;
+  right: 34.2%;
   top: 44%;
 }
