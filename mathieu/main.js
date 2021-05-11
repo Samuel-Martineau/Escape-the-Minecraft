@@ -129,12 +129,12 @@ function paper3ToMiddle() {
 }
 
 function paper3ToBottom() {
-  left3 = left3 - 0.12;
+  right3 = right3 - 0.12;
   top3 = top3 + 0.45;
   width3 = width3 - 0.03;
   bottomCounter3 = bottomCounter3 + 1;
 
-  paper3.style.left = left3 + "%";
+  paper3.style.right = right3 + "%";
   paper3.style.top = top3 + "%";
   paper3.style.width = width3 + "%";
 
