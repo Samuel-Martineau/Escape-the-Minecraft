@@ -6,19 +6,8 @@
  * @returns {number}
  */
 export function distance(x1, y1, x2, y2) {
-  return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5;
+  return Math.hypot(x1 - x2, y1 - y2);
 }
-
-// /**
-//  * @param {HTMLDivElement} slideElement
-//  */
-// export function getSlideDimensions(slideElement) {
-//   const children = Array.from(slideElement.children);
-//   return {
-//     width: Math.max(...children.map((c) => c.clientWidth)),
-//     height: Math.max(...children.map((c) => c.clientHeight)),
-//   };
-// }
 
 /**
  * @param {Array} a
