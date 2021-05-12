@@ -33,6 +33,7 @@ body {
   width: 3%;
   height: auto;
   display: none;
+  transition: 1000ms ease-in-out;
 }
 
 .paper1 {
@@ -48,4 +49,31 @@ body {
 .paper3 {
   right: 34.2%;
   top: 44%;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%;
+}
+
+.paper1Down {
+  top: 80%;
+  left: 40%;
+  width: 10%;
+}
+
+.paper2Down {
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10%;
+}
+
+.paper3Down {
+  top: 80%;
+  right: 40%;
+  width: 10%;
 }
