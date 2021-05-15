@@ -33,48 +33,198 @@ body {
   width: 3%;
   height: auto;
   display: none;
-  transition: 1000ms ease-in-out;
 }
 
-.paper1 {
-  left: 35%;
-  top: 44%;
+@keyframes paper1Found {
+  0% {
+    position: absolute;
+    left: 35%;
+    top: 44%;
+    width: 3%;
+  }
+  45% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+  }
+  55% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+  }
+  100% {
+    position: absolute;
+    top: 78.8%;
+    left: 39%;
+    width: 10%;
+  }
 }
 
-.paper2 {
-  left: 49%;
-  top: 44%;
+.paper1Animation {
+  animation-name: paper1Found;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
 }
 
-.paper3 {
-  right: 34.2%;
-  top: 44%;
+@keyframes paper2Found {
+  0% {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 44%;
+    width: 3%;
+  }
+  45% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+  }
+  55% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+  }
+  100% {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10%;
+  }
 }
 
-.center {
-  transition: 1000ms ease-in-out;
+.paper2Animation {
+  animation-name: paper2Found;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes paper3Found {
+  0% {
+    position: absolute;
+    right: 34.2%;
+    top: 44%;
+    width: 3%;
+  }
+  45% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+  }
+  55% {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+  }
+  100% {
+    position: absolute;
+    top: 79.8%;
+    right: 40.25%;
+    width: 10%;
+  }
+}
+
+.paper3Animation {
+  animation-name: paper3Found;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+.fullPaper {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 15%;
-}
-
-.paper1Down {
-  top: 80%;
   left: 40%;
-  width: 10%;
+  top: 80.5%;
+  width: 18%;
+  display: none;
+  cursor: pointer;
 }
 
-.paper2Down {
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 10%;
+@keyframes allPaperFound {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
 }
 
-.paper3Down {
-  top: 80%;
-  right: 40%;
-  width: 10%;
+.paperAnimation1 {
+  animation-name: allPaperFound;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes paperCenter {
+  0% {
+    position: absolute;
+    left: 40%;
+    top: 80.5%;
+    width: 18%;
+  }
+  100% {
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    width: 72%;
+  }
+}
+
+.paperAnimation2 {
+  animation-name: paperCenter;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.letterBox {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 28%;
+  width: 50%;
+  height: 30%;
+}
+
+.letterBank {
+  width: 100%;
+  display: flex;
+  height: 23.5%;
+}
+
+.emptySpots {
+  width: 100%;
+  margin-top: 12%;
+  display: flex;
+  height: 23.5%;
+}
+
+.letterSpot {
+  background-image: url(Images/letterImage.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex: 1;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+  cursor: grab;
+  transition: 500ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+}
+
+.letterSpot:hover {
+  transform: translateY(15%);
 }

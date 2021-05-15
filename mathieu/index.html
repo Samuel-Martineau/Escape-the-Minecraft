@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projet final - Escape room</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="npc npc1" id="npc1" onclick="paper1Appear()"></div>
@@ -30,6 +35,36 @@
       class="paper paper3"
       id="paper3"
     />
+    <img
+      src="Images/paper.png"
+      alt="Paper"
+      class="fullPaper"
+      id="paper"
+      onclick="openPaper()"
+    />
+    <div class="letterBox" id="letterBox">
+      <div class="letterBank">
+        <div class="letterSpot" id="letterSpot0"></div>
+        <div class="letterSpot" id="letterSpot1"></div>
+        <div class="letterSpot" id="letterSpot2"></div>
+        <div class="letterSpot" id="letterSpot3"></div>
+        <div class="letterSpot" id="letterSpot4"></div>
+        <div class="letterSpot" id="letterSpot5"></div>
+        <div class="letterSpot" id="letterSpot6"></div>
+        <div class="letterSpot" id="letterSpot7"></div>
+      </div>
+
+      <div class="emptySpots">
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+        <div class="letterSpot"></div>
+      </div>
+    </div>
 
     <script src="main.js"></script>
   </body>
