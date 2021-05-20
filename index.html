@@ -26,7 +26,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        font-family: "Montserrat", sans-serif;
+        font-family: 'Montserrat', sans-serif;
         color: white;
         background: rgba(0, 0, 0, 0.65) url(./images/dirt.png);
         background-blend-mode: darken;
@@ -100,9 +100,9 @@
       </div>
     </main>
     <script>
-      const iframe = document.querySelector("iframe");
-      const nameSpan = document.querySelector("#name");
-      const timer = document.querySelector("#timer");
+      const iframe = document.querySelector('iframe');
+      const nameSpan = document.querySelector('#name');
+      const timer = document.querySelector('#timer');
 
       let time = 45 * 60;
 
@@ -115,9 +115,9 @@
           let seconds = time % 60;
           let minutes = (time - seconds) / 60;
 
-          timer.textContent = `${minutes.toLocaleString("fr-ca", {
+          timer.textContent = `${minutes.toLocaleString('fr-ca', {
             minimumIntegerDigits: 2,
-          })}:${seconds.toLocaleString("fr-ca", {
+          })}:${seconds.toLocaleString('fr-ca', {
             minimumIntegerDigits: 2,
           })}`;
         }
@@ -125,16 +125,16 @@
 
       const people = [
         {
-          name: "Samuel Martineau",
-          game: "./samuel/index.html",
+          name: 'Samuel Martineau',
+          game: './samuel/index.html',
         },
         {
-          name: "Vu Dang Khoa Chiem",
-          game: "./dangkhoa/index.html",
+          name: 'Vu Dang Khoa Chiem',
+          game: './dangkhoa/index.html',
         },
         {
-          name: "Mathieu Guimond",
-          game: "./mathieu/index.html",
+          name: 'Mathieu Guimond',
+          game: './mathieu/index.html',
         },
       ];
       let index = -1;
@@ -147,17 +147,22 @@
 
       function showDefeat() {
         index = -1;
-        iframe.src = "./end.html?screen=defeat";
-        nameSpan.textContent = "TOUS";
+        iframe.src = './end.html?screen=defeat';
+        nameSpan.textContent = 'TOUS';
       }
 
       function showVictory() {
         index = -1;
-        iframe.src = "./end.html?screen=victory";
-        nameSpan.textContent = "TOUS";
+        iframe.src = './end.html?screen=victory';
+        nameSpan.textContent = 'TOUS';
       }
 
-      nextPerson();
+      const person = new URLSearchParams(window.location.search).get('person');
+
+      if (person) {
+        index = people.findIndex((p) => p.name === person) - 1;
+        nextPerson();
+      } else nextPerson();
     </script>
   </body>
 </html>
