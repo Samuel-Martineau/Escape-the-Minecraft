@@ -28,7 +28,7 @@
         flex-direction: column;
         font-family: "Montserrat", sans-serif;
         color: white;
-        background: rgba(0, 0, 0, 0.65) url(./images/dirt.png);
+        background: rgba(0, 0, 0, 0.65) url(./assets/dirt.png);
         background-blend-mode: darken;
         background-size: 80px;
         image-rendering: pixelated;
@@ -77,10 +77,35 @@
         top: 50px;
         left: 50px;
       }
+
+      #music-btn {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      #music-btn[data-enabled="true"] #music-btn-disabled {
+        display: none;
+      }
+
+      #music-btn[data-enabled="false"] #music-btn-enabled {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <h1 id="timer"></h1>
+
+    <h1 id="music-btn" data-enabled="false">
+      <span id="music-btn-enabled">🔊</span>
+      <span id="music-btn-disabled">🔈</span>
+    </h1>
+
+    <audio src="./assets/music.ogg"></audio>
 
     <h1>Escape the Minecraft</h1>
 
@@ -100,9 +125,8 @@
         <iframe src="" frameborder="0" allowtransparency="true"></iframe>
       </div>
     </main>
+    <!-- Minuteur -->
     <script>
-      const iframe = document.querySelector("iframe");
-      const nameSpan = document.querySelector("#name");
       const timer = document.querySelector("#timer");
 
       let time = 45 * 60;
@@ -123,6 +147,26 @@
           })}`;
         }
       }, 1000);
+    </script>
+    <!-- Musique -->
+    <script>
+      const musicBtn = document.querySelector("#music-btn");
+      const music = document.querySelector("audio");
+
+      let isMusicEnabled = false;
+
+      musicBtn.addEventListener("click", () => {
+        isMusicEnabled = !isMusicEnabled;
+        if (isMusicEnabled) music.play();
+        else music.pause();
+
+        musicBtn.setAttribute("data-enabled", isMusicEnabled);
+      });
+    </script>
+    <!-- Personnes -->
+    <script>
+      const iframe = document.querySelector("iframe");
+      const nameSpan = document.querySelector("#name");
 
       const people = [
         {
@@ -145,6 +189,8 @@
         iframe.src = person.game;
         nameSpan.textContent = person.name;
       }
+
+      const nextLevel = nextPerson;
 
       function showDefeat() {
         index = -1;
