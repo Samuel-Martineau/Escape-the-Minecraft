@@ -1,4 +1,4 @@
-import { areArraysEqual, distance } from "./utils.js";
+import { areArraysEqual, distance, randomRange, wait } from "./utils.js";
 
 /**
  * @param {number} delay
@@ -375,6 +375,122 @@ export const slideControllers = [
       }
     },
     onMove() {},
+  },
+  // Défi 4 -> Simon
+  {
+    data: {
+      clickRadius: 0.05,
+      maps: [
+        {
+          x: 0.28,
+          y: 0.52,
+        },
+        {
+          x: 0.43,
+          y: 0.52,
+        },
+        {
+          x: 0.57,
+          y: 0.52,
+        },
+        {
+          x: 0.73,
+          y: 0.52,
+        },
+      ],
+    },
+    state: {
+      sequence: [],
+      /**
+       * @param {HTMLDivElement} slideElement
+       * @param {number} mouseX
+       * @param {number} mouseY
+       */
+      updateCursor(slideElement, mouseX, mouseY) {
+        const { clientWidth: width, clientHeight: height } = slideElement;
+        slideElement.style.cursor = "auto";
+        for (const [i, m] of this.data.maps.entries()) {
+          const x = m.x * width;
+          const y = m.y * height;
+
+          if (distance(x, y, mouseX, mouseY) <= this.data.clickRadius * width) {
+            const map = document.querySelector(`#c4-map-${i}`);
+            if (map.classList.contains("hidden"))
+              slideElement.style.cursor = "pointer";
+          }
+        }
+      },
+      async watchPhase() {
+        this.state.phase = "watch";
+        await wait(250);
+        this.state.sequence.push(randomRange(0, 3));
+        for (const mapIndex of this.state.sequence) {
+          const map = document.querySelector(`#c4-map-${mapIndex}`);
+          map.classList.remove("hidden");
+          await wait(500);
+          map.classList.add("hidden");
+          await wait(250);
+        }
+        this.state.guess = [];
+        this.state.phase = "play";
+        if (this.state.lastMousePos) {
+          const { mouseX, mouseY } = this.state.lastMousePos;
+          this.state.updateCursor.call(
+            this,
+            this.state.slideElement,
+            mouseX,
+            mouseY
+          );
+        }
+      },
+    },
+    onInit({ slideElement }) {
+      this.state.slideElement = slideElement;
+    },
+    onShow({ slideElement }) {
+      this.state.watchPhase.call(this);
+    },
+    onHide() {},
+    onClick(e, { slideElement, slidesManager }) {
+      if (this.state.phase !== "play") return;
+
+      const { offsetX: mouseX, offsetY: mouseY } = e;
+      const { clientWidth: width, clientHeight: height } = slideElement;
+
+      slideElement.style.cursor = "auto";
+      for (const [i, m] of this.data.maps.entries()) {
+        const x = m.x * width;
+        const y = m.y * height;
+
+        if (distance(x, y, mouseX, mouseY) <= this.data.clickRadius * width) {
+          const map = document.querySelector(`#c4-map-${i}`);
+          if (map.classList.contains("hidden")) {
+            map.classList.remove("hidden");
+            setTimeout(async () => {
+              map.classList.add("hidden");
+
+              if (this.state.guess.length === this.state.sequence.length)
+                if (areArraysEqual(this.state.guess, this.state.sequence))
+                  if (this.state.guess.length >= 5) slidesManager.next();
+                  else this.state.watchPhase.call(this);
+                else {
+                  this.state.guess = [];
+                  this.state.sequence = [];
+                  alert("wrong");
+                  this.state.watchPhase.call(this);
+                }
+            }, 500);
+            this.state.guess.push(i);
+          }
+        }
+      }
+    },
+    onMove(e, { slideElement }) {
+      if (this.state.phase !== "play") return;
+      const { offsetX: mouseX, offsetY: mouseY } = e;
+      this.state.lastMousePos = { mouseX, mouseY };
+      this.state.updateCursor.call(this, slideElement, mouseX, mouseY);
+    },
   },
   // Animation de fin P1
   automaticSlideController(500),
