@@ -15,7 +15,7 @@
       body {
         margin: 0;
         padding: 0;
-        height: 100%;
+        min-height: 100%;
         box-sizing: border-box;
         background-color: white;
       }
@@ -26,7 +26,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        font-family: "Montserrat", sans-serif;
+        font-family: 'Montserrat', sans-serif;
         color: white;
         background: rgba(0, 0, 0, 0.65) url(./assets/dirt.png);
         background-blend-mode: darken;
@@ -94,11 +94,11 @@
         opacity: 1;
       }
 
-      #music-btn[data-enabled="true"] #music-btn-disabled {
+      #music-btn[data-enabled='true'] #music-btn-disabled {
         display: none;
       }
 
-      #music-btn[data-enabled="false"] #music-btn-enabled {
+      #music-btn[data-enabled='false'] #music-btn-enabled {
         display: none;
       }
     </style>
@@ -150,7 +150,7 @@
     </main>
     <!-- Minuteur -->
     <script>
-      const timer = document.querySelector("#timer");
+      const timer = document.querySelector('#timer');
 
       let time = 45 * 60;
 
@@ -163,9 +163,9 @@
           let seconds = time % 60;
           let minutes = (time - seconds) / 60;
 
-          timer.textContent = `${minutes.toLocaleString("fr-ca", {
+          timer.textContent = `${minutes.toLocaleString('fr-ca', {
             minimumIntegerDigits: 2,
-          })}:${seconds.toLocaleString("fr-ca", {
+          })}:${seconds.toLocaleString('fr-ca', {
             minimumIntegerDigits: 2,
           })}`;
         }
@@ -173,36 +173,36 @@
     </script>
     <!-- Musique -->
     <script>
-      const musicBtn = document.querySelector("#music-btn");
-      const music = document.querySelector("audio");
+      const musicBtn = document.querySelector('#music-btn');
+      const music = document.querySelector('audio');
 
       let isMusicEnabled = false;
 
-      musicBtn.addEventListener("click", () => {
+      musicBtn.addEventListener('click', () => {
         isMusicEnabled = !isMusicEnabled;
         if (isMusicEnabled) music.play();
         else music.pause();
 
-        musicBtn.setAttribute("data-enabled", isMusicEnabled);
+        musicBtn.setAttribute('data-enabled', isMusicEnabled);
       });
     </script>
     <!-- Personnes -->
     <script>
-      const iframe = document.querySelector("iframe");
-      const nameSpan = document.querySelector("#name");
+      const iframe = document.querySelector('iframe');
+      const nameSpan = document.querySelector('#name');
 
       const people = [
         {
-          name: "Samuel Martineau, Groupe 404",
-          game: "./samuel/index.html",
+          name: 'Samuel Martineau, Groupe 404',
+          game: './samuel/index.html',
         },
         {
-          name: "Vu Dang Khoa Chiem, Groupe 403",
-          game: "./dangkhoa/index.html",
+          name: 'Vu Dang Khoa Chiem, Groupe 403',
+          game: './dangkhoa/index.html',
         },
         {
-          name: "Mathieu Guimond, Groupe 405",
-          game: "./mathieu/index.html",
+          name: 'Mathieu Guimond, Groupe 405',
+          game: './mathieu/index.html',
         },
       ];
       let index = -1;
@@ -217,17 +217,17 @@
 
       function showDefeat() {
         index = -1;
-        iframe.src = "./end.html?screen=defeat";
-        nameSpan.textContent = "TOUS";
+        iframe.src = './end.html?screen=defeat';
+        nameSpan.textContent = 'TOUS';
       }
 
       function showVictory() {
         index = -1;
-        iframe.src = "./end.html?screen=victory";
-        nameSpan.textContent = "TOUS";
+        iframe.src = './end.html?screen=victory';
+        nameSpan.textContent = 'TOUS';
       }
 
-      const person = new URLSearchParams(window.location.search).get("person");
+      const person = new URLSearchParams(window.location.search).get('person');
 
       if (person) {
         index = people.findIndex((p) => p.name === person) - 1;
