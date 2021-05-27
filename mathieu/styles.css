@@ -231,3 +231,9 @@ body {
 .letter {
   cursor: grab;
 }
+
+.vaultArrival {
+  display: none;
+  width: 100%;
+  height: auto;
+}

@@ -44,7 +44,11 @@
     />
     <div class="letterBox" id="letterBox">
       <div class="letterBank">
-        <div class="letterSpot" id="letterSpot0">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter0"
@@ -52,7 +56,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot1">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter1"
@@ -60,7 +68,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot2">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter2"
@@ -68,7 +80,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot3">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter3"
@@ -76,7 +92,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot4">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter4"
@@ -84,7 +104,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot5">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter5"
@@ -92,7 +116,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot6">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter6"
@@ -100,7 +128,11 @@
             ondragstart="drag(event)"
           ></p>
         </div>
-        <div class="letterSpot" id="letterSpot7">
+        <div
+          class="letterSpot"
+          ondrop="drop(event)"
+          ondragover="allowDrop(event)"
+        >
           <p
             class="letter"
             id="letter7"
@@ -113,46 +145,58 @@
       <div class="emptySpots">
         <div
           class="letterSpot"
+          id="letterSpot0"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot1"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot2"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot3"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot4"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot5"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot6"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
         <div
           class="letterSpot"
+          id="letterSpot7"
           ondrop="drop(event)"
           ondragover="allowDrop(event)"
         ></div>
       </div>
     </div>
+
+    <video class="vaultArrival" id="vaultArrival" muted autoplay>
+      <source src="Videos/vaultArrival.mp4" />
+    </video>
 
     <script src="main.js"></script>
   </body>

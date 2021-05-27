@@ -23,6 +23,20 @@ var letters = [
   document.getElementById("letter6"),
   document.getElementById("letter7"),
 ];
+var bottomLetterSpots = [
+  document.getElementById("letterSpot0"),
+  document.getElementById("letterSpot1"),
+  document.getElementById("letterSpot2"),
+  document.getElementById("letterSpot3"),
+  document.getElementById("letterSpot4"),
+  document.getElementById("letterSpot5"),
+  document.getElementById("letterSpot6"),
+  document.getElementById("letterSpot7"),
+];
+var placedLetters = [];
+var letterCode = ["a", "l", "p", "h", "a", "b", "e", "t"];
+var vaultArrival = document.getElementById("vaultArrival");
+vaultArrival.pause();
 
 function paper1Appear() {
   npc1.style.display = "none";
@@ -120,4 +134,19 @@ function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
   ev.target.appendChild(document.getElementById(data));
+
+  document.getElementById(data).draggable = "false";
+
+  placedLetters = [];
+
+  bottomLetterSpots.forEach((letter) => {
+    placedLetters.push(letter.innerText);
+  });
+
+  if (placedLetters.toString() == letterCode.toString()) {
+    paper.style.display = "none";
+    letterBox.style.display = "none";
+    vaultArrival.style.display = "block";
+    vaultArrival.play();
+  }
 }
