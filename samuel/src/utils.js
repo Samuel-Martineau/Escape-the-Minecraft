@@ -21,6 +21,16 @@ export function areArraysEqual(a, b) {
 }
 
 /**
+ *
+ * @param {Array<T>} arr
+ * @returns T
+ * @template T
+ */
+export function arrayLast(arr) {
+  return arr[arr.length - 1];
+}
+
+/**
  * @param {number} min
  * @param {number} max
  * @returns {number}
@@ -34,4 +44,26 @@ export function randomRange(min, max) {
  */
 export function wait(delay) {
   return new Promise((r) => setTimeout(r, delay));
+}
+
+/**
+ */
+export function playBadSound() {
+  /**
+   * @type {HTMLAudioElement}
+   */
+  const bad = document.querySelector("#bad-sound");
+  console.log("Playing bad.ogg ...");
+  bad.play();
+}
+
+/**
+ */
+export function playGoodSound() {
+  /**
+   * @type {HTMLAudioElement}
+   */
+  const bad = document.querySelector("#good-sound");
+  console.log("Playing good.ogg ...");
+  bad.play();
 }
