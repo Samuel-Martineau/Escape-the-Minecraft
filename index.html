@@ -15,7 +15,7 @@
       body {
         margin: 0;
         padding: 0;
-        height: 100%;
+        min-height: 100vh;
         box-sizing: border-box;
         background-color: white;
       }
@@ -28,7 +28,7 @@
         flex-direction: column;
         font-family: 'Montserrat', sans-serif;
         color: white;
-        background: rgba(0, 0, 0, 0.65) url(./images/dirt.png);
+        background: rgba(0, 0, 0, 0.65) url(./assets/dirt.png);
         background-blend-mode: darken;
         background-size: 80px;
         image-rendering: pixelated;
@@ -77,10 +77,41 @@
         top: 50px;
         left: 50px;
       }
+
+      #music-btn {
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        cursor: pointer;
+        user-select: none;
+        opacity: 0.7;
+        transition: 500ms;
+      }
+
+      #music-btn:hover {
+        opacity: 1;
+      }
+
+      #music-btn[data-enabled='true'] #music-btn-disabled {
+        display: none;
+      }
+
+      #music-btn[data-enabled='false'] #music-btn-enabled {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <h1 id="timer"></h1>
+
+    <h1 id="music-btn" data-enabled="false">
+      <span id="music-btn-enabled">🔊</span>
+      <span id="music-btn-disabled">🔈</span>
+    </h1>
+
+    <audio src="./assets/music.ogg"></audio>
 
     <h1>Escape the Minecraft</h1>
 
@@ -88,7 +119,24 @@
 
     <details open>
       <summary><b>Instructions</b></summary>
-      <span>Test</span>
+      <span>
+        <p>Appuyer sur Instructions pour ouvrir et fermer les instructions</p>
+        <p>
+          Vous pouvez éteindre la musique en faisant un click sur le bouton en
+          haut à droite de votre écrant
+        </p>
+        <p>
+          Lorsque votre votre pointer se transforme en main, c'est un indice que
+          vous pouvez intéragir avec cet élément du jeu
+        </p>
+        <p>
+          Vous aurez 45 minutes pour terminer le jeu. Vous pouvez voir le temps
+          restant en haut à gauche de votre écran.
+        </p>
+        <p>
+          Si vous n'avez pas fini lorsque le temps sera écoulé, vous aurez perdu
+        </p>
+      </span>
     </details>
 
     <hr />
@@ -100,9 +148,8 @@
         <iframe src="" frameborder="0" allowtransparency="true"></iframe>
       </div>
     </main>
+    <!-- Minuteur -->
     <script>
-      const iframe = document.querySelector('iframe');
-      const nameSpan = document.querySelector('#name');
       const timer = document.querySelector('#timer');
 
       let time = 45 * 60;
@@ -123,22 +170,42 @@
           })}`;
         }
       }, 1000);
+    </script>
+    <!-- Musique -->
+    <script>
+      const musicBtn = document.querySelector('#music-btn');
+      const music = document.querySelector('audio');
+
+      let isMusicEnabled = false;
+
+      musicBtn.addEventListener('click', () => {
+        isMusicEnabled = !isMusicEnabled;
+        if (isMusicEnabled) music.play();
+        else music.pause();
+
+        musicBtn.setAttribute('data-enabled', isMusicEnabled);
+      });
+    </script>
+    <!-- Personnes -->
+    <script>
+      const iframe = document.querySelector('iframe');
+      const nameSpan = document.querySelector('#name');
 
       const people = [
         {
-          name: 'Samuel Martineau',
+          name: 'Samuel Martineau, Groupe 404',
           game: './samuel/index.html',
         },
         {
-          name: 'Vu Dang Khoa Chiem',
+          name: 'Vu Dang Khoa Chiem, Groupe 403',
           game: './dangkhoa/index.html',
         },
         {
-          name: 'Jun Ru Luo',
+          name: 'Jun Ru Luo, Groupe 405',
           game: './junru/index.html',
         },
         {
-          name: 'Mathieu Guimond',
+          name: 'Mathieu Guimond, Groupe 405',
           game: './mathieu/index.html',
         },
       ];
@@ -149,6 +216,8 @@
         iframe.src = person.game;
         nameSpan.textContent = person.name;
       }
+
+      const nextLevel = nextPerson;
 
       function showDefeat() {
         index = -1;
@@ -162,7 +231,12 @@
         nameSpan.textContent = 'TOUS';
       }
 
-      nextPerson();
+      const person = new URLSearchParams(window.location.search).get('person');
+
+      if (person) {
+        index = people.findIndex((p) => p.name === person) - 1;
+        nextPerson();
+      } else nextPerson();
     </script>
   </body>
 </html>

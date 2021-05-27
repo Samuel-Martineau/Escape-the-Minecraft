@@ -13,7 +13,17 @@ var letterList2 = ["t", "e", "p", "a", "a", "h", "l", "b"];
 var letterList3 = ["b", "a", "p", "l", "a", "h", "t", "e"];
 var letterChoice = 0;
 var letterBox = document.getElementById("letterBox");
-var letterSpots = [
+var letters = [
+  document.getElementById("letter0"),
+  document.getElementById("letter1"),
+  document.getElementById("letter2"),
+  document.getElementById("letter3"),
+  document.getElementById("letter4"),
+  document.getElementById("letter5"),
+  document.getElementById("letter6"),
+  document.getElementById("letter7"),
+];
+var bottomLetterSpots = [
   document.getElementById("letterSpot0"),
   document.getElementById("letterSpot1"),
   document.getElementById("letterSpot2"),
@@ -23,6 +33,10 @@ var letterSpots = [
   document.getElementById("letterSpot6"),
   document.getElementById("letterSpot7"),
 ];
+var placedLetters = [];
+var letterCode = ["a", "l", "p", "h", "a", "b", "e", "t"];
+var vaultArrival = document.getElementById("vaultArrival");
+vaultArrival.pause();
 
 function paper1Appear() {
   npc1.style.display = "none";
@@ -85,18 +99,54 @@ function openPaper() {
   paper.classList.remove("paperAnimation1");
   paper.classList.add("paperAnimation2");
 
-  letterBox.style.display = "block";
-
   paper.onclick = "";
 
-  // letterChoice = Math.ceil(Math.random() * 3);
-  letterChoice = 1;
+  letterChoice = Math.ceil(Math.random() * 3);
 
   if (letterChoice == 1) {
-    letterSpots.forEach((letterSpot, index) => {
-      letterSpot.innerText = letterList1[index];
+    letters.forEach((letter, index) => {
+      letter.innerText = letterList1[index];
     });
   } else if (letterChoice == 2) {
+    letters.forEach((letter, index) => {
+      letter.innerText = letterList2[index];
+    });
   } else if (letterChoice == 3) {
+    letters.forEach((letter, index) => {
+      letter.innerText = letterList3[index];
+    });
+  }
+
+  setTimeout(function () {
+    letterBox.style.display = "block";
+  }, 1000);
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+
+  document.getElementById(data).draggable = "false";
+
+  placedLetters = [];
+
+  bottomLetterSpots.forEach((letter) => {
+    placedLetters.push(letter.innerText);
+  });
+
+  if (placedLetters.toString() == letterCode.toString()) {
+    paper.style.display = "none";
+    letterBox.style.display = "none";
+    vaultArrival.style.display = "block";
+    vaultArrival.play();
   }
 }

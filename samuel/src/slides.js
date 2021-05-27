@@ -1,4 +1,11 @@
-import { areArraysEqual, distance } from "./utils.js";
+import {
+  areArraysEqual,
+  arrayLast,
+  distance,
+  playBadSound,
+  randomRange,
+  wait,
+} from "./utils.js";
 
 /**
  * @param {number} delay
@@ -256,6 +263,27 @@ export const slideControllers = [
     },
     state: {
       guess: [],
+      /**
+       * @param {HTMLDivElement} slideElement
+       * @param {number} mouseX
+       * @param {number} mouseY
+       */
+      updateCursor(slideElement, mouseX, mouseY) {
+        const { clientWidth: width, clientHeight: height } = slideElement;
+        slideElement.style.cursor = "auto";
+
+        if (
+          distance(
+            mouseX,
+            mouseY,
+            this.data.chest.x * width,
+            this.data.chest.y * height
+          ) <=
+          this.data.clickRadius * width
+        )
+          slideElement.style.cursor = "pointer";
+        else slideElement.style.cursor = "";
+      },
     },
     onInit({ slideElement, slidesManager }) {
       /**
@@ -338,6 +366,7 @@ export const slideControllers = [
         clickRadius * width
       ) {
         if (this.state.isInventoryOpen) return;
+        slideElement.style.cursor = "";
 
         const inventory = document.querySelector(
           `#c4-inventory-${Math.floor(Math.random() * 4)}`
@@ -374,7 +403,140 @@ export const slideControllers = [
         }, this.data.time);
       }
     },
-    onMove() {},
+    onMove(e, { slideElement }) {
+      const { offsetX: mouseX, offsetY: mouseY } = e;
+      this.state.lastMousePos = { mouseX, mouseY };
+      if (this.state.isInventoryOpen) return;
+      this.state.updateCursor.call(this, slideElement, mouseX, mouseY);
+    },
+  },
+  // Défi 4 -> Simon
+  {
+    data: {
+      clickRadius: 0.05,
+      maps: [
+        {
+          x: 0.28,
+          y: 0.52,
+        },
+        {
+          x: 0.43,
+          y: 0.52,
+        },
+        {
+          x: 0.57,
+          y: 0.52,
+        },
+        {
+          x: 0.73,
+          y: 0.52,
+        },
+      ],
+    },
+    state: {
+      sequence: [],
+      guess: [],
+      /**
+       * @param {HTMLDivElement} slideElement
+       * @param {number} mouseX
+       * @param {number} mouseY
+       */
+      updateCursor(slideElement, mouseX, mouseY) {
+        const { clientWidth: width, clientHeight: height } = slideElement;
+        slideElement.style.cursor = "auto";
+        for (const [i, m] of this.data.maps.entries()) {
+          const x = m.x * width;
+          const y = m.y * height;
+
+          if (distance(x, y, mouseX, mouseY) <= this.data.clickRadius * width) {
+            const map = document.querySelector(`#c4-map-${i}`);
+            if (map.classList.contains("hidden"))
+              slideElement.style.cursor = "pointer";
+          }
+        }
+      },
+      async watchPhase() {
+        this.state.phase = "watch";
+        await wait(250);
+        this.state.sequence.push(randomRange(0, 3));
+        this.state.guess = [];
+        for (const mapIndex of this.state.sequence) {
+          const map = document.querySelector(`#c4-map-${mapIndex}`);
+          map.classList.remove("hidden");
+          await wait(500);
+          map.classList.add("hidden");
+          await wait(250);
+        }
+        this.state.guess = [];
+        this.state.phase = "play";
+        if (this.state.lastMousePos) {
+          const { mouseX, mouseY } = this.state.lastMousePos;
+          this.state.updateCursor.call(
+            this,
+            this.state.slideElement,
+            mouseX,
+            mouseY
+          );
+        }
+      },
+    },
+    onInit({ slideElement }) {
+      this.state.slideElement = slideElement;
+    },
+    onShow({ slideElement }) {
+      this.state.watchPhase.call(this);
+    },
+    onHide() {},
+    onClick(e, { slideElement, slidesManager }) {
+      if (this.state.phase !== "play") return;
+
+      const { offsetX: mouseX, offsetY: mouseY } = e;
+      const { clientWidth: width, clientHeight: height } = slideElement;
+
+      slideElement.style.cursor = "auto";
+      for (const [i, m] of this.data.maps.entries()) {
+        const x = m.x * width;
+        const y = m.y * height;
+
+        if (distance(x, y, mouseX, mouseY) <= this.data.clickRadius * width) {
+          const map = document.querySelector(`#c4-map-${i}`);
+          if (map.classList.contains("hidden")) {
+            map.classList.remove("hidden");
+            this.state.guess.push(i);
+
+            const isGuessDone =
+              this.state.guess.length === this.state.sequence.length;
+            const isCorrect = areArraysEqual(
+              this.state.guess,
+              this.state.sequence
+            );
+            const isGameDone = this.state.sequence.length >= 5;
+
+            setTimeout(async () => {
+              map.classList.add("hidden");
+
+              wait(500);
+
+              if (isGuessDone) {
+                if (isGameDone) slidesManager.next();
+                else if (isCorrect) this.state.watchPhase.call(this);
+                else {
+                  this.state.sequence = [];
+                  playBadSound();
+                  this.state.watchPhase.call(this);
+                }
+              }
+            }, 500);
+          }
+        }
+      }
+    },
+    onMove(e, { slideElement }) {
+      if (this.state.phase !== "play") return;
+      const { offsetX: mouseX, offsetY: mouseY } = e;
+      this.state.lastMousePos = { mouseX, mouseY };
+      this.state.updateCursor.call(this, slideElement, mouseX, mouseY);
+    },
   },
   // Animation de fin P1
   automaticSlideController(500),
@@ -388,6 +550,7 @@ export const slideControllers = [
   automaticSlideController(500),
   // Animation de fin P6
   videoSlideController(),
+  // Passage à la prochaine personne
   {
     data: {},
     state: {},
