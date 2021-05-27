@@ -193,14 +193,17 @@
 
       const people = [
         {
+          id: 'sm',
           name: 'Samuel Martineau, Groupe 404',
           game: './samuel/index.html',
         },
         {
+          id: 'vc',
           name: 'Vu Dang Khoa Chiem, Groupe 403',
           game: './dangkhoa/index.html',
         },
         {
+          id: 'mg',
           name: 'Mathieu Guimond, Groupe 405',
           game: './mathieu/index.html',
         },
@@ -230,7 +233,7 @@
       const person = new URLSearchParams(window.location.search).get('person');
 
       if (person) {
-        index = people.findIndex((p) => p.name === person) - 1;
+        index = people.findIndex((p) => p.id === person) - 1;
         nextPerson();
       } else nextPerson();
     </script>
