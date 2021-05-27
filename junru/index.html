@@ -1,0 +1,231 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Minecraft</title>
+    <style>
+      #cin1 {
+        display: fixed;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        opacity: 100;
+      }
+      body {
+        background-image: url('./img/coffresDroite.png');
+        background-size: cover;
+      }
+      #hintBook {
+        display: none;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        right: 800px;
+        bottom: 450px;
+      }
+      #hints {
+        display: none;
+        width: 400px;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+      }
+      #cin2 {
+        display: none;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        opacity: 100;
+      }
+      #chest1{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest2{
+        width: 180px;
+        height: 60px;
+        position: absolute;
+        left: 620px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest3{
+        width: 160px;
+        height: 60px;
+        position: absolute;
+        left: 875px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest4{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest5{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest6{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest7{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest8{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest9{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+      #chest10{
+        width: 190px;
+        height: 60px;
+        position: absolute;
+        left: 360px;
+        top: 450px;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    video playsinline autoplay muted id="cin1">
+      <source src="./vid/1cin.mov" type="video/mp4" />
+    </video>
+    <div id="hintBook" onClick="hints()"></div>
+    <img src="./img/indices.png" id="hints" />
+    <video muted id="cin2">
+      <source src="./vid/2cin.mp4" type="video/mp4" />
+    </video>
+    <div id="chest1"></div>
+    <div id="chest2"></div>
+    <div id="chest3"></div>
+    <div id="chest4"></div>
+    <div id="chest5"></div>
+    <div id="chest6"></div>
+    <div id="chest7"></div>
+    <div id="chest8"></div>
+    <div id="chest9"></div>
+    <div id="chest10"></div>
+
+    <script>
+      document.addEventListener('keydown', keyboard);
+      setTimeout(elimVid, 8000);
+      function elimVid() {
+        document.getElementById('cin1').style.display = 'none';
+        findHints();
+      }
+      function findHints() {
+        document.body.style.backgroundImage = 'url("./img/findHints.png")';
+        document.getElementById('hintBook').style.display = 'flex';
+      }
+      function hints() {
+        document.getElementById('hints').style.display = 'flex';
+        setTimeout(invPath, 1000);
+      }
+      var pressedKey;
+
+      function keyboard(e) {
+        console.log(e.keyCode);
+        if (e.keyCode == 87) {
+          checkStep('w');
+          console.log('W');
+        }
+        if (e.keyCode == 65) {
+          checkStep('a');
+          console.log('A');
+        }
+        if (e.keyCode == 68) {
+          checkStep('d');
+          console.log('D');
+        }
+      }
+      var steps = [
+        'w',
+        'w',
+        'w',
+        'd',
+        'w',
+        'w',
+        'w',
+        'a',
+        'w',
+        'w',
+        'd',
+        'w',
+        'a',
+        'w',
+        'w',
+        'w',
+        'a',
+        'w',
+        'd',
+        'w',
+      ];
+      var currentStepIndex = 0;
+
+      function checkStep(key) {
+        if (key === steps[currentStepIndex]) {
+          console.log('ok: ' + key);
+          if (currentStepIndex <= steps.length) {
+            currentStepIndex++;
+          }
+          document.body.style.backgroundImage = `url(./img/${currentStepIndex}.png)`;
+        } else {
+          console.log('recommencer');
+          currentStepIndex = 0;
+          document.body.style.backgroundImage = 'url("./img/inLava1.png")';
+          setTimeout(
+            (document.body.style.backgroundImage = 'url("./img/inLava2.png")'),
+            1000,
+          );
+        }
+      }
+
+      function resInvPath() {
+        i = 0;
+        invPath();
+      }
+      function invPath() {
+        document.body.style.backgroundImage = 'url("./img/0.png")';
+      }
+      function cin2() {}
+    </script>
+  </body>
+</html>
