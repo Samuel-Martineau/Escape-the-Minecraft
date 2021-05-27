@@ -1,4 +1,11 @@
-import { areArraysEqual, distance, randomRange, wait } from "./utils.js";
+import {
+  areArraysEqual,
+  arrayLast,
+  distance,
+  playBadSound,
+  randomRange,
+  wait,
+} from "./utils.js";
 
 /**
  * @param {number} delay
@@ -256,6 +263,27 @@ export const slideControllers = [
     },
     state: {
       guess: [],
+      /**
+       * @param {HTMLDivElement} slideElement
+       * @param {number} mouseX
+       * @param {number} mouseY
+       */
+      updateCursor(slideElement, mouseX, mouseY) {
+        const { clientWidth: width, clientHeight: height } = slideElement;
+        slideElement.style.cursor = "auto";
+
+        if (
+          distance(
+            mouseX,
+            mouseY,
+            this.data.chest.x * width,
+            this.data.chest.y * height
+          ) <=
+          this.data.clickRadius * width
+        )
+          slideElement.style.cursor = "pointer";
+        else slideElement.style.cursor = "";
+      },
     },
     onInit({ slideElement, slidesManager }) {
       /**
@@ -338,6 +366,7 @@ export const slideControllers = [
         clickRadius * width
       ) {
         if (this.state.isInventoryOpen) return;
+        slideElement.style.cursor = "";
 
         const inventory = document.querySelector(
           `#c4-inventory-${Math.floor(Math.random() * 4)}`
@@ -374,7 +403,12 @@ export const slideControllers = [
         }, this.data.time);
       }
     },
-    onMove() {},
+    onMove(e, { slideElement }) {
+      const { offsetX: mouseX, offsetY: mouseY } = e;
+      this.state.lastMousePos = { mouseX, mouseY };
+      if (this.state.isInventoryOpen) return;
+      this.state.updateCursor.call(this, slideElement, mouseX, mouseY);
+    },
   },
   // Défi 4 -> Simon
   {
@@ -401,6 +435,7 @@ export const slideControllers = [
     },
     state: {
       sequence: [],
+      guess: [],
       /**
        * @param {HTMLDivElement} slideElement
        * @param {number} mouseX
@@ -424,6 +459,7 @@ export const slideControllers = [
         this.state.phase = "watch";
         await wait(250);
         this.state.sequence.push(randomRange(0, 3));
+        this.state.guess = [];
         for (const mapIndex of this.state.sequence) {
           const map = document.querySelector(`#c4-map-${mapIndex}`);
           map.classList.remove("hidden");
@@ -466,21 +502,31 @@ export const slideControllers = [
           const map = document.querySelector(`#c4-map-${i}`);
           if (map.classList.contains("hidden")) {
             map.classList.remove("hidden");
+            this.state.guess.push(i);
+
+            const isGuessDone =
+              this.state.guess.length === this.state.sequence.length;
+            const isCorrect = areArraysEqual(
+              this.state.guess,
+              this.state.sequence
+            );
+            const isGameDone = this.state.sequence.length >= 5;
+
             setTimeout(async () => {
               map.classList.add("hidden");
 
-              if (this.state.guess.length === this.state.sequence.length)
-                if (areArraysEqual(this.state.guess, this.state.sequence))
-                  if (this.state.guess.length >= 5) slidesManager.next();
-                  else this.state.watchPhase.call(this);
+              wait(500);
+
+              if (isGuessDone) {
+                if (isGameDone) slidesManager.next();
+                else if (isCorrect) this.state.watchPhase.call(this);
                 else {
-                  this.state.guess = [];
                   this.state.sequence = [];
-                  alert("wrong");
+                  playBadSound();
                   this.state.watchPhase.call(this);
                 }
+              }
             }, 500);
-            this.state.guess.push(i);
           }
         }
       }
@@ -504,6 +550,7 @@ export const slideControllers = [
   automaticSlideController(500),
   // Animation de fin P6
   videoSlideController(),
+  // Passage à la prochaine personne
   {
     data: {},
     state: {},

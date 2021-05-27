@@ -6,3 +6,6 @@ const slidesManager = new SlidesManager(slideControllers);
 document
   .querySelectorAll('img:not([draggable="true"])')
   .forEach((img) => img.setAttribute("draggable", "false"));
+
+// @ts-ignore
+window.parent.samuelNextSlide = slidesManager.next.bind(slidesManager);
