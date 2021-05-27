@@ -47,23 +47,23 @@ export function wait(delay) {
 }
 
 /**
+ * @param {string} soundName
  */
-export function playBadSound() {
+function playSoundFactory(soundName) {
   /**
    * @type {HTMLAudioElement}
    */
-  const bad = document.querySelector("#bad-sound");
-  console.log("Playing bad.ogg ...");
-  bad.play();
+  const sound = document.querySelector(`#${soundName}-sound`);
+  return () => {
+    sound.currentTime = 0;
+    sound.play();
+  };
 }
 
-/**
- */
-export function playGoodSound() {
-  /**
-   * @type {HTMLAudioElement}
-   */
-  const bad = document.querySelector("#good-sound");
-  console.log("Playing good.ogg ...");
-  bad.play();
-}
+export const playBadSound = playSoundFactory("bad");
+export const playSuccessSound = playSoundFactory("success");
+export const playActionSound = playSoundFactory("action");
+export const playNote1Sound = playSoundFactory("note-1");
+export const playNote2Sound = playSoundFactory("note-2");
+export const playNote3Sound = playSoundFactory("note-3");
+export const playNote4Sound = playSoundFactory("note-4");
