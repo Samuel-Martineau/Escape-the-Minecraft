@@ -9,3 +9,8 @@ document
 
 // @ts-ignore
 window.parent.samuelNextSlide = slidesManager.next.bind(slidesManager);
+
+slidesManager.next();
+slidesManager.next();
+slidesManager.next();
+slidesManager.next();

@@ -374,8 +374,6 @@ export const slideControllers = [
     },
     onHide() {},
     onClick(e, { slideElement }) {
-      playActionSound();
-
       const { offsetX: mouseX, offsetY: mouseY } = e;
       const { clientWidth: width, clientHeight: height } = slideElement;
       const { clickRadius, chest, items } = this.data;
@@ -385,6 +383,7 @@ export const slideControllers = [
         clickRadius * width
       ) {
         if (this.state.isInventoryOpen) return;
+        playActionSound();
         slideElement.style.cursor = "";
 
         const inventory = document.querySelector(
@@ -468,19 +467,22 @@ export const slideControllers = [
         if (!this.state.lastMousePos) return;
         const slideElement = this.state.slideElement;
         const { mouseX, mouseY } = this.state.lastMousePos;
-        console.log("updateCursor()");
         const { clientWidth: width, clientHeight: height } = slideElement;
         slideElement.style.cursor = "auto";
-        for (const [i, m] of this.data.maps.entries()) {
-          const x = m.x * width;
-          const y = m.y * height;
+        if (this.state.phase !== "watch")
+          for (const [i, m] of this.data.maps.entries()) {
+            const x = m.x * width;
+            const y = m.y * height;
 
-          if (distance(x, y, mouseX, mouseY) <= this.data.clickRadius * width) {
-            const map = document.querySelector(`#c4-map-${i}`);
-            if (map.classList.contains("hidden"))
-              slideElement.style.cursor = "pointer";
+            if (
+              distance(x, y, mouseX, mouseY) <=
+              this.data.clickRadius * width
+            ) {
+              const map = document.querySelector(`#c4-map-${i}`);
+              if (map.classList.contains("hidden"))
+                slideElement.style.cursor = "pointer";
+            }
           }
-        }
       },
       async watchPhase() {
         this.state.phase = "watch";
@@ -536,6 +538,8 @@ export const slideControllers = [
             const isCorrectGuess =
               this.state.sequence[this.state.guess.length - 1] ===
               arrayLast(this.state.guess);
+
+            if (isGuessDone) this.state.phase = "watch";
 
             if (isCorrectGuess) m.sound();
             else playBadSound();
