@@ -1,10 +1,16 @@
 import {
   areArraysEqual,
-  arrayLast,
   distance,
-  playBadSound,
   randomRange,
   wait,
+  playBadSound,
+  playSuccessSound,
+  playActionSound,
+  playNote1Sound,
+  playNote2Sound,
+  playNote3Sound,
+  playNote4Sound,
+  arrayLast,
 } from "./utils.js";
 
 /**
@@ -110,6 +116,7 @@ export const slideControllers = [
       fireDropzone.addEventListener("drop", (e) => {
         e.preventDefault();
         fireDropzone.style.backgroundColor = "";
+        playSuccessSound();
         slidesManager.next();
       });
       fireDropzone.addEventListener(
@@ -157,7 +164,7 @@ export const slideControllers = [
     onInit() {},
     onShow() {},
     onHide() {},
-    onClick(e, { slideElement, slidesManager }) {
+    async onClick(e, { slideElement, slidesManager }) {
       // Checking if any lever
 
       const { offsetX: mouseX, offsetY: mouseY } = e;
@@ -175,12 +182,17 @@ export const slideControllers = [
           const leverImage = document.querySelector(`#c2-lever-${index}`);
           leverImage.classList.toggle("hidden");
           this.state.levers[index] = !this.state.levers[index];
+          playActionSound();
+
           break;
         }
       }
 
-      if (areArraysEqual(this.state.levers, [true, false, true, false]))
+      if (areArraysEqual(this.state.levers, [true, false, true, false])) {
+        await wait(500);
+        playSuccessSound();
         slidesManager.next();
+      }
     },
     onMove(e, { slideElement }) {
       const { offsetX: mouseX, offsetY: mouseY } = e;
@@ -335,16 +347,21 @@ export const slideControllers = [
       }
 
       for (const [index, dropzoneDiv] of dropzoneDivs.entries()) {
-        dropzoneDiv.addEventListener("drop", (e) => {
+        dropzoneDiv.addEventListener("drop", async (e) => {
           e.preventDefault();
 
           const itemIndex = parseInt(e.dataTransfer.getData("text"));
 
           dropzoneDiv.style.backgroundImage = `url(${itemImages[itemIndex].src})`;
 
+          playActionSound();
+
           this.state.guess[index] = itemIndex;
-          if (this.state.guess.join("") === this.state.answer)
+          if (this.state.guess.join("") === this.state.answer) {
+            await wait(500);
+            playSuccessSound();
             slidesManager.next();
+          }
         });
 
         dropzoneDiv.addEventListener("dragover", (e) => {
@@ -366,6 +383,7 @@ export const slideControllers = [
         clickRadius * width
       ) {
         if (this.state.isInventoryOpen) return;
+        playActionSound();
         slideElement.style.cursor = "";
 
         const inventory = document.querySelector(
@@ -418,18 +436,22 @@ export const slideControllers = [
         {
           x: 0.28,
           y: 0.52,
+          sound: playNote1Sound,
         },
         {
           x: 0.43,
           y: 0.52,
+          sound: playNote2Sound,
         },
         {
           x: 0.57,
           y: 0.52,
+          sound: playNote3Sound,
         },
         {
           x: 0.73,
           y: 0.52,
+          sound: playNote4Sound,
         },
       ],
     },
@@ -441,19 +463,26 @@ export const slideControllers = [
        * @param {number} mouseX
        * @param {number} mouseY
        */
-      updateCursor(slideElement, mouseX, mouseY) {
+      updateCursor() {
+        if (!this.state.lastMousePos) return;
+        const slideElement = this.state.slideElement;
+        const { mouseX, mouseY } = this.state.lastMousePos;
         const { clientWidth: width, clientHeight: height } = slideElement;
         slideElement.style.cursor = "auto";
-        for (const [i, m] of this.data.maps.entries()) {
-          const x = m.x * width;
-          const y = m.y * height;
+        if (this.state.phase !== "watch")
+          for (const [i, m] of this.data.maps.entries()) {
+            const x = m.x * width;
+            const y = m.y * height;
 
-          if (distance(x, y, mouseX, mouseY) <= this.data.clickRadius * width) {
-            const map = document.querySelector(`#c4-map-${i}`);
-            if (map.classList.contains("hidden"))
-              slideElement.style.cursor = "pointer";
+            if (
+              distance(x, y, mouseX, mouseY) <=
+              this.data.clickRadius * width
+            ) {
+              const map = document.querySelector(`#c4-map-${i}`);
+              if (map.classList.contains("hidden"))
+                slideElement.style.cursor = "pointer";
+            }
           }
-        }
       },
       async watchPhase() {
         this.state.phase = "watch";
@@ -463,30 +492,29 @@ export const slideControllers = [
         for (const mapIndex of this.state.sequence) {
           const map = document.querySelector(`#c4-map-${mapIndex}`);
           map.classList.remove("hidden");
+          this.data.maps[mapIndex].sound();
           await wait(500);
           map.classList.add("hidden");
           await wait(250);
         }
         this.state.guess = [];
         this.state.phase = "play";
-        if (this.state.lastMousePos) {
-          const { mouseX, mouseY } = this.state.lastMousePos;
-          this.state.updateCursor.call(
-            this,
-            this.state.slideElement,
-            mouseX,
-            mouseY
-          );
-        }
       },
     },
     onInit({ slideElement }) {
       this.state.slideElement = slideElement;
     },
-    onShow({ slideElement }) {
+    async onShow({ slideElement }) {
+      this.state.updateCursorInterval = setInterval(
+        this.state.updateCursor.bind(this),
+        10
+      );
+      await wait(500);
       this.state.watchPhase.call(this);
     },
-    onHide() {},
+    onHide() {
+      clearInterval(this.state.updateCursorInterval);
+    },
     onClick(e, { slideElement, slidesManager }) {
       if (this.state.phase !== "play") return;
 
@@ -504,27 +532,31 @@ export const slideControllers = [
             map.classList.remove("hidden");
             this.state.guess.push(i);
 
-            const isGuessDone =
-              this.state.guess.length === this.state.sequence.length;
-            const isCorrect = areArraysEqual(
-              this.state.guess,
-              this.state.sequence
-            );
             const isGameDone = this.state.sequence.length >= 5;
+            const isGuessDone =
+              this.state.sequence.length === this.state.guess.length;
+            const isCorrectGuess =
+              this.state.sequence[this.state.guess.length - 1] ===
+              arrayLast(this.state.guess);
+
+            if (isGuessDone) this.state.phase = "watch";
+
+            if (isCorrectGuess) m.sound();
+            else playBadSound();
 
             setTimeout(async () => {
               map.classList.add("hidden");
 
-              wait(500);
+              await wait(750);
 
-              if (isGuessDone) {
-                if (isGameDone) slidesManager.next();
-                else if (isCorrect) this.state.watchPhase.call(this);
-                else {
-                  this.state.sequence = [];
-                  playBadSound();
-                  this.state.watchPhase.call(this);
-                }
+              if (!isCorrectGuess) {
+                this.state.sequence = [];
+                this.state.watchPhase.call(this);
+              } else if (isGuessDone) {
+                if (isGameDone) {
+                  playSuccessSound();
+                  slidesManager.next();
+                } else this.state.watchPhase.call(this);
               }
             }, 500);
           }
@@ -532,10 +564,8 @@ export const slideControllers = [
       }
     },
     onMove(e, { slideElement }) {
-      if (this.state.phase !== "play") return;
       const { offsetX: mouseX, offsetY: mouseY } = e;
       this.state.lastMousePos = { mouseX, mouseY };
-      this.state.updateCursor.call(this, slideElement, mouseX, mouseY);
     },
   },
   // Animation de fin P1

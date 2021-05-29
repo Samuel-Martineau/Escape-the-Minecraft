@@ -26,7 +26,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        font-family: 'Montserrat', sans-serif;
+        font-family: "Montserrat", sans-serif;
         color: white;
         background: rgba(0, 0, 0, 0.65) url(./assets/dirt.png);
         background-blend-mode: darken;
@@ -54,13 +54,13 @@
         border-radius: 20px;
       }
 
-      details {
-        text-align: center;
+      summary {
+        user-select: none;
         cursor: pointer;
       }
 
-      summary {
-        user-select: none;
+      details {
+        text-align: center;
       }
 
       hr {
@@ -94,11 +94,11 @@
         opacity: 1;
       }
 
-      #music-btn[data-enabled='true'] #music-btn-disabled {
+      #music-btn[data-enabled="true"] #music-btn-disabled {
         display: none;
       }
 
-      #music-btn[data-enabled='false'] #music-btn-enabled {
+      #music-btn[data-enabled="false"] #music-btn-enabled {
         display: none;
       }
     </style>
@@ -122,12 +122,12 @@
       <span>
         <p>Appuyer sur Instructions pour ouvrir et fermer les instructions</p>
         <p>
-          Vous pouvez éteindre la musique en faisant un click sur le bouton en
-          haut à droite de votre écrant
+          Vous pouvez éteindre et allumer la musique en faisant un click sur le
+          bouton en haut à droite de votre écrant
         </p>
         <p>
-          Lorsque votre votre pointer se transforme en main, c'est un indice que
-          vous pouvez intéragir avec cet élément du jeu
+          Lorsque votre votre curseur se transforme, c'est un indice que vous
+          pouvez intéragir avec cet élément du jeu
         </p>
         <p>
           Vous aurez 45 minutes pour terminer le jeu. Vous pouvez voir le temps
@@ -150,7 +150,7 @@
     </main>
     <!-- Minuteur -->
     <script>
-      const timer = document.querySelector('#timer');
+      const timer = document.querySelector("#timer");
 
       let time = 45 * 60;
 
@@ -163,9 +163,9 @@
           let seconds = time % 60;
           let minutes = (time - seconds) / 60;
 
-          timer.textContent = `${minutes.toLocaleString('fr-ca', {
+          timer.textContent = `${minutes.toLocaleString("fr-ca", {
             minimumIntegerDigits: 2,
-          })}:${seconds.toLocaleString('fr-ca', {
+          })}:${seconds.toLocaleString("fr-ca", {
             minimumIntegerDigits: 2,
           })}`;
         }
@@ -173,69 +173,71 @@
     </script>
     <!-- Musique -->
     <script>
-      const musicBtn = document.querySelector('#music-btn');
-      const music = document.querySelector('audio');
+      const musicBtn = document.querySelector("#music-btn");
+      const music = document.querySelector("audio");
 
       let isMusicEnabled = false;
 
-      musicBtn.addEventListener('click', () => {
+      musicBtn.addEventListener("click", () => {
         isMusicEnabled = !isMusicEnabled;
         if (isMusicEnabled) music.play();
         else music.pause();
 
-        musicBtn.setAttribute('data-enabled', isMusicEnabled);
+        musicBtn.setAttribute("data-enabled", isMusicEnabled);
       });
     </script>
     <!-- Personnes -->
     <script>
-      const iframe = document.querySelector('iframe');
-      const nameSpan = document.querySelector('#name');
+      const iframe = document.querySelector("iframe");
+      const nameSpan = document.querySelector("#name");
 
       const people = [
         {
-          id: 'sm',
-          name: 'Samuel Martineau, Groupe 404',
-          game: './samuel/index.html',
+          id: "sm",
+          name: "Samuel Martineau, Groupe 404",
+          game: "./samuel/index.html",
         },
         {
-          id: 'vc',
-          name: 'Vu Dang Khoa Chiem, Groupe 403',
-          game: './dangkhoa/index.html',
+          id: "vc",
+          name: "Vu Dang Khoa Chiem, Groupe 403",
+          game: "./dangkhoa/index.html",
         },
         {
-          id: 'jr',
-          name: 'Jun Ru, Groupe 405',
-          game: './junru/index.html',
+          id: "jr",
+          name: "Jun Ru, Groupe 405",
+          game: "./junru/index.html",
         },
         {
-          id: 'mg',
-          name: 'Mathieu Guimond, Groupe 405',
-          game: './mathieu/index.html',
+          id: "mg",
+          name: "Mathieu Guimond, Groupe 405",
+          game: "./mathieu/index.html",
         },
       ];
       let index = -1;
 
       function nextPerson() {
         const person = people[++index];
-        iframe.src = person.game;
-        nameSpan.textContent = person.name;
+        if (person) {
+          iframe.src = person.game;
+          nameSpan.textContent = person.name;
+        } else showVictory();
       }
 
       const nextLevel = nextPerson;
 
       function showDefeat() {
         index = -1;
-        iframe.src = './end.html?screen=defeat';
-        nameSpan.textContent = 'TOUS';
+        iframe.src = "./end.html?screen=defeat";
+        nameSpan.textContent = "TOUS";
       }
 
       function showVictory() {
         index = -1;
-        iframe.src = './end.html?screen=victory';
-        nameSpan.textContent = 'TOUS';
+        iframe.src = "./end.html?screen=victory";
+        nameSpan.textContent = "TOUS";
       }
 
-      const person = new URLSearchParams(window.location.search).get('person');
+      const person = new URLSearchParams(window.location.search).get("person");
 
       if (person) {
         index = people.findIndex((p) => p.id === person) - 1;
