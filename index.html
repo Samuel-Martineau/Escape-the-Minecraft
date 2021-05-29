@@ -112,7 +112,6 @@
       #instructions {
         color: black;
         background-color: white;
-        text-align: center;
         padding: 50px;
         border-radius: 20px;
         position: fixed;
@@ -139,26 +138,28 @@
   <body>
     <div id="overlay" onclick="toggleInstructions()"></div>
     <div id="instructions">
-      <p>Appuyer sur Instructions pour ouvrir et fermer les instructions</p>
-      <p>
-        Vous pouvez éteindre et allumer la musique en faisant un click sur le
-        bouton en haut à droite de votre écrant
-      </p>
-      <p>
-        Lorsque votre votre curseur se transforme, c'est un indice que vous
-        pouvez intéragir avec cet élément du jeu
-      </p>
-      <p>
-        Vous aurez 45 minutes pour terminer le jeu. Vous pouvez voir le temps
-        restant en haut à gauche de votre écran.
-      </p>
-      <p>
-        Si vous n'avez pas fini lorsque le temps sera écoulé, vous aurez perdu
-      </p>
-      <p>
-        Si vous ne réussissez pas une des énigmes, vous pourrez voir la solution
-        dans la console du navigateur
-      </p>
+      <h2 style="text-align: center">Instructions</h2>
+      <ul>
+        <li>
+          Vous pouvez éteindre et allumer la musique en faisant un click sur le
+          bouton en haut à droite de votre écran
+        </li>
+        <li>
+          Lorsque votre votre curseur se transforme, c'est un indice que vous
+          pouvez intéragir avec cet élément du jeu
+        </li>
+        <li>
+          Vous aurez 45 minutes pour terminer le jeu. Vous pouvez voir le temps
+          restant en haut à gauche de votre écran
+        </li>
+        <li>
+          Si vous n'avez pas fini lorsque le temps sera écoulé, vous aurez perdu
+        </li>
+        <li>
+          Si vous ne réussissez pas une des énigmes, vous pourrez voir la
+          solution dans la console du navigateur
+        </li>
+      </ul>
     </div>
 
     <h1 id="timer"></h1>
