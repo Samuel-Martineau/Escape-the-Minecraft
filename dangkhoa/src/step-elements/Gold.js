@@ -1,12 +1,8 @@
-import { Gui } from '../../lib/components/Gui.js';
 import { Area } from '../../lib/components/Area.js';
-import { ItemGrid } from '../../lib/components/Items/ItemGrid.js';
 import { Item } from '../../lib/components/Items/Item.js';
 import { Position } from '../../lib/utility/Position.js';
 import { Size } from '../../lib/utility/Size.js';
 import { GameElement } from '../../lib/GameElement.js';
-
-import { chestItemsList } from '../../lib/constants.js';
 
 const pickaxeImage = document.createElement('img');
 const pickaxeItem = new Item('stone_pickaxe.png');

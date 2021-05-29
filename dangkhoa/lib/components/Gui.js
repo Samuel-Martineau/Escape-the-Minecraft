@@ -13,7 +13,7 @@ export class Gui extends GameElement {
     this.html.style.zIndex = 10;
     this.html.style.width = '100vw';
     this.html.style.height = '100vh';
-    this.html.style.backgroundImage = `url(frame-components/${this.path})`;
+    this.html.style.backgroundImage = `url(gui/${this.path})`;
     this.html.style.backgroundSize = 'cover';
 
     window.addEventListener('keydown', (e) => {
