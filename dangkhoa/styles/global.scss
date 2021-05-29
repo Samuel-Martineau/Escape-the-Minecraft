@@ -1,8 +1,24 @@
+@keyframes usePickaxe {
+  0% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  20% {
+    transform: rotate(20deg) translateY(-20px);
+  }
+  50% {
+    transform: rotate(-70deg) translateY(-10px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0px);
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  user-select: none;
   .frame {
     height: 100vh;
     background-position: center;

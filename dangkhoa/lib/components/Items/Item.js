@@ -1,6 +1,6 @@
-import { GuiElement } from '../../GuiElement.js';
+import { GameElement } from '../../GameElement.js';
 
-export class Item extends GuiElement {
+export class Item extends GameElement {
   constructor(imagePath, cursor) {
     super();
     this.imagePath = imagePath;
@@ -11,11 +11,11 @@ export class Item extends GuiElement {
     // HTML Element
     this.html = document.createElement('div');
     this.html.className = 'item';
-    this.html.imagePath = this.imagePath;
     this.html.style.height = '100%';
     this.html.style.width = '100%';
     this.html.style.position = 'relative';
     this.html.draggable = true;
+    this.html.imagePath = this.imagePath;
 
     this.html.ondragstart = (e) => {
       setTimeout(() => {

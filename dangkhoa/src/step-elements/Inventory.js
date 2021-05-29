@@ -1,13 +1,13 @@
-import { ItemGrid } from './Items/ItemGrid.js';
-import { Item } from './Items/Item.js';
-import { Position } from '../utility/Position.js';
-import { GuiElement } from '../GuiElement.js';
+import { ItemGrid } from '../../lib/components/Items/ItemGrid.js';
+import { Item } from '../../lib/components/Items/Item.js';
+import { Position } from '../../lib/utility/Position.js';
+import { GameElement } from '../../lib/GameElement.js';
 
-export class Inventory extends GuiElement {
+export class Inventory extends GameElement {
   constructor() {
     super();
 
-    // Create Clickable Area
+    // Create Inventory
     this.html = document.createElement('div');
     this.html.style.position = 'absolute';
     this.html.style.bottom = '0';
@@ -24,6 +24,7 @@ export class Inventory extends GuiElement {
     this.html.style.imageRendering = '-moz-crisp-edges';
     this.html.style.imageRendering = 'crisp-edges';
 
+    // Create Inventory Grid
     this.grid = new ItemGrid(
       9,
       1,
@@ -33,6 +34,7 @@ export class Inventory extends GuiElement {
     this.grid.html.style.zIndex = 11000;
     this.grid.html.style.width = '37.5%';
 
+    // Add to DOM
     window.HTMLFrame.appendChild(this.html);
   }
 }

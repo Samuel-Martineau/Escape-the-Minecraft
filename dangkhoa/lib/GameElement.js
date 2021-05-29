@@ -1,4 +1,4 @@
-export class GuiElement extends EventTarget {
+export class GameElement extends EventTarget {
   constructor() {
     super();
   }
