@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape Minecraft</title>
     <style>
-      #bypass {
-        position: absolute;
-        left: 2%;
-        bottom: 2%;
-        width: 2.5%;
-        height: 4%;
-        background-color: white;
-      }
       #cin1 {
         display: fixed;
         position: fixed;
@@ -27,6 +19,7 @@
         background-size: cover;
       }
       #hintBook {
+        cursor: pointer;
         display: none;
         width: 3%;
         height: 5%;
@@ -50,95 +43,161 @@
         height: 100%;
         opacity: 100;
       }
+      #z {
+        display: none;
+        position: absolute;
+        width: 4%;
+        height: 5%;
+        left: 5%;
+        bottom: 10%;
+        text-align: center;
+        background-color: white;
+      }
+      #c {
+        display: none;
+        position: absolute;
+        width: 4%;
+        height: 5%;
+        right: 5%;
+        bottom: 10%;
+        text-align: center;
+        background-color: white;
+      }
+      #x {
+        display: none;
+        position: absolute;
+        width: 4%;
+        height: 5%;
+        left: 50%;
+        bottom: 10%;
+        text-align: center;
+        background-color: white;
+      }
       #chest1 {
+        cursor: pointer;
         display: none;
         width: 11%;
         height: 6%;
         position: absolute;
         left: 18%;
         top: 41%;
-        background-color: white;
       }
       #chest2 {
+        cursor: pointer;
         display: none;
         width: 9%;
         height: 6%;
         position: absolute;
         left: 32%;
         top: 41%;
-        background-color: white;
       }
       #chest3 {
+        cursor: pointer;
         display: none;
         width: 8%;
         height: 6%;
         position: absolute;
         left: 46%;
         top: 41%;
-        background-color: white;
       }
       #chest4 {
+        cursor: pointer;
         display: none;
         width: 9%;
         height: 6%;
         position: absolute;
         left: 59%;
         top: 41%;
-        background-color: white;
       }
       #chest5 {
+        cursor: pointer;
         display: none;
         width: 11%;
         height: 6%;
         position: absolute;
         left: 71%;
         top: 41%;
-        background-color: white;
       }
       #chest6 {
+        cursor: pointer;
         display: none;
         width: 11%;
         height: 6%;
         position: absolute;
         left: 18%;
         top: 57%;
-        background-color: white;
       }
       #chest7 {
+        cursor: pointer;
         display: none;
         width: 9%;
         height: 6%;
         position: absolute;
         left: 32%;
         top: 57%;
-        background-color: white;
       }
       #chest8 {
+        cursor: pointer;
         display: none;
         width: 8%;
         height: 6%;
         position: absolute;
         left: 46%;
         top: 57%;
-        background-color: white;
       }
       #chest9 {
+        cursor: pointer;
         display: none;
         width: 9%;
         height: 6%;
         position: absolute;
         left: 59%;
         top: 57%;
-        background-color: white;
       }
       #chest10 {
+        cursor: pointer;
         display: none;
         width: 11%;
         height: 6%;
         position: absolute;
         left: 71%;
         top: 57%;
-        background-color: white;
+      }
+      #hand {
+        display: none;
+        position: absolute;
+        width: 30%;
+        height: 30%;
+        right: 10%;
+        bottom: 0%;
+        background-image: url('./img/coffres/hand.png');
+      }
+      #inHand {
+        position: absolute;
+        width: 50%;
+        height: 75%;
+        left: 10%;
+        top: 20%;
+        background-image: url('./img/chestItems/key.png');
+        fill: 100%;
+      }
+      #chestItem {
+        display: none;
+        position: absolute;
+        width: 17%;
+        height: 30%;
+        left: 40%;
+        top: 35%;
+        background-image: none;
+      }
+      #key {
+        display: none;
+        position: absolute;
+        width: 17%;
+        height: 30%;
+        left: 40%;
+        top: 35%;
+        background-image: none;
       }
     </style>
   </head>
@@ -147,23 +206,33 @@
       <source src="./vid/1cin.mov" type="video/mp4" />
     </video>
     <div id="hintBook" onClick="hints()"></div>
-    <img src="./img/indices.png" id="hints" />
+    <img src="./img/invBridge/indices.png" id="hints" />
     <video playinsline muted id="cin2">
       <source src="./vid/2cin.mp4" type="video/mp4" />
     </video>
 
-    <div id="bypass" onClick="playVid()"></div>
+    <div id="z">-z</div>
+    <div id="c">c-</div>
+    <div id="x">-x-</div>
 
-    <div id="chest1"></div>
-    <div id="chest2"></div>
-    <div id="chest3"></div>
-    <div id="chest4"></div>
-    <div id="chest5"></div>
-    <div id="chest6"></div>
-    <div id="chest7"></div>
-    <div id="chest8"></div>
-    <div id="chest9"></div>
-    <div id="chest10"></div>
+    <div id="chest1" onClick="chest1()"></div>
+    <div id="chest2" onClick="chest2()"></div>
+    <div id="chest3" onClick="chest3()"></div>
+    <div id="chest4" onClick="chest4()"></div>
+    <div id="chest5" onClick="chest5()"></div>
+    <div id="chest6" onClick="chest6()"></div>
+    <div id="chest7" onClick="chest7()"></div>
+    <div id="chest8" onClick="chest8()"></div>
+    <div id="chest9" onClick="chest9()"></div>
+    <div id="chest10" onClick="chest10()"></div>
+
+    <div id="chestItem"></div>
+
+    <div id="key" onClick="theKey()"></div>
+
+    <div id="hand">
+      <div id="inHand" onClick="keyOnHand()"></div>
+    </div>
 
     <script>
       document.addEventListener('keydown', keyboard);
@@ -173,14 +242,14 @@
         findHints();
       }
       function findHints() {
-        document.body.style.backgroundImage = 'url("./img/findHints.png")';
+        document.body.style.backgroundImage =
+          'url("./img/invBridge/findHints.png")';
         document.getElementById('hintBook').style.display = 'flex';
       }
       function hints() {
         document.getElementById('hints').style.display = 'flex';
         setTimeout(invPath, 1000);
       }
-      var pressedKey;
 
       function keyboard(e) {
         console.log(e.keyCode);
@@ -195,6 +264,18 @@
         if (e.keyCode == 68) {
           checkStep('d');
           console.log('D');
+        }
+        if (e.keyCode == 90) {
+          changeChest('z');
+          console.log('Z');
+        }
+        if (e.keyCode == 88) {
+          changeChest('x');
+          console.log('X');
+        }
+        if (e.keyCode == 67) {
+          changeChest('c');
+          console.log('C');
         }
       }
       var steps = [
@@ -220,56 +301,65 @@
         'w',
       ];
       var currentStepIndex = 0;
+      var whichRoom = 0;
       function invPath() {
-        document.body.style.backgroundImage = 'url("./img/0.png")';
+        document.body.style.backgroundImage = 'url("./img/invBridge/0.png")';
       }
       function checkStep(key) {
         if (key === steps[currentStepIndex]) {
           console.log('ok: ' + key);
           if (currentStepIndex <= steps.length) {
             currentStepIndex++;
-            document.body.style.backgroundImage = `url(./img/${currentStepIndex}.png)`;
+            document.body.style.backgroundImage = `url(./img/invBridge/${currentStepIndex}.png)`;
             if (currentStepIndex == steps.length) {
               document.getElementById('hints').style.display = 'none';
               setTimeout(playVid(), 500);
+              currentStepIndex = -10;
+              whichRoom = 1;
+              steps = [];
             }
           }
         } else {
-          console.log('recommencer');
+          if (whichRoom === 0) {
+            console.log('recommencer');
 
-          document.body.style.backgroundImage = 'url("./img/inLava/1.png")';
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/2.png")';
-          }, 200);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/3.png")';
-          }, 400);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/4.png")';
-          }, 600);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/5.png")';
-          }, 800);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/6.png")';
-          }, 1000);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/7.png")';
-          }, 1200);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/8.png")';
-          }, 1400);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/9.png")';
-          }, 1600);
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/inLava/10.png")';
-          }, 1800);
+            document.body.style.backgroundImage = 'url("./img/inLava/1.png")';
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/2.png")';
+            }, 200);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/3.png")';
+            }, 400);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/4.png")';
+            }, 600);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/5.png")';
+            }, 800);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/6.png")';
+            }, 1000);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/7.png")';
+            }, 1200);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/8.png")';
+            }, 1400);
+            setTimeout(function () {
+              document.body.style.backgroundImage = 'url("./img/inLava/9.png")';
+            }, 1600);
+            setTimeout(function () {
+              document.body.style.backgroundImage =
+                'url("./img/inLava/10.png")';
+            }, 1800);
 
-          setTimeout(function () {
-            document.body.style.backgroundImage = 'url("./img/0.png")';
-          }, 2000);
-          currentStepIndex = 0;
+            setTimeout(function () {
+              document.body.style.backgroundImage =
+                'url("./img/invBridge/0.png")';
+            }, 2000);
+            setTimeout((currentStepIndex = 0), 2000);
+            currentStepIndex = 0;
+          }
         }
       }
       var vid = document.getElementById('cin2');
@@ -278,21 +368,316 @@
         document.getElementById('cin2').style.display = 'flex';
         vid.play();
         console.log(vid);
-        document.body.style.backgroundImage = 'url("./img/coffresMid.png")';
         setTimeout(function () {
           document.getElementById('cin2').style.display = 'none';
         }, 10000);
+        document.body.style.backgroundImage =
+          'url("./img/coffres/coffresMid.png")';
       }
-      function changeChest() {
-        if (key == 'a') {
+      var chestSide = 0;
+      function changeChest(key) {
+        document.body.style.backgroundImage =
+          'url("./img/coffres/coffresMid.png")';
+        document.getElementById('hand').style.display = 'flex';
+        if (key === 'z') {
           document.body.style.backgroundImage =
-            'url("./img/coffresGauche.png")';
+            'url("./img/coffres/coffresGauche.png")';
+          document.getElementById('chest1').style.display = 'flex';
+          document.getElementById('chest2').style.display = 'flex';
+          document.getElementById('chest3').style.display = 'flex';
+          document.getElementById('chest4').style.display = 'flex';
+          document.getElementById('chest5').style.display = 'flex';
+          document.getElementById('chest6').style.display = 'flex';
+          document.getElementById('chest7').style.display = 'flex';
+          document.getElementById('chest8').style.display = 'flex';
+          document.getElementById('chest9').style.display = 'flex';
+          document.getElementById('chest10').style.display = 'flex';
+          chestSide = 1;
         }
-        if (key == 'd') {
+
+        if (key === 'c') {
           document.body.style.backgroundImage =
-            'url("./img/coffresDroite.png")';
+            'url("./img/coffres/coffresDroite.png")';
+          document.getElementById('chest1').style.display = 'flex';
+          document.getElementById('chest2').style.display = 'flex';
+          document.getElementById('chest3').style.display = 'flex';
+          document.getElementById('chest4').style.display = 'flex';
+          document.getElementById('chest5').style.display = 'flex';
+          document.getElementById('chest6').style.display = 'flex';
+          document.getElementById('chest7').style.display = 'flex';
+          document.getElementById('chest8').style.display = 'flex';
+          document.getElementById('chest9').style.display = 'flex';
+          document.getElementById('chest10').style.display = 'flex';
+          chestSide = 2;
+        }
+        if (key === 'x') {
+          document.body.style.backgroundImage =
+            'url("./img/coffres/coffresMid.png")';
+          document.getElementById('chest1').style.display = 'none';
+          document.getElementById('chest2').style.display = 'none';
+          document.getElementById('chest3').style.display = 'none';
+          document.getElementById('chest4').style.display = 'none';
+          document.getElementById('chest5').style.display = 'none';
+          document.getElementById('chest6').style.display = 'none';
+          document.getElementById('chest7').style.display = 'none';
+          document.getElementById('chest8').style.display = 'none';
+          document.getElementById('chest9').style.display = 'none';
+          document.getElementById('chest10').style.display = 'none';
+          chestSide = 0;
         }
       }
+      function chest1() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest1');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/apple.gif")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest1');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/bow.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest2() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest2');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url(""./img/chestItems/chicken.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest2');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/feather.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest3() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest3');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/fire.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest3');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/gunpowder.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest4() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest4');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/ink.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest4');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/lava.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest5() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest5');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/minecart.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest5');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/paper.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest6() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest6');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/hoe.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest6');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/pearl.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest7() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest7');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/potato.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest7');
+          document.getElementById('key').style.display = 'flex';
+          document.getElementById('key').style.backgroundImage =
+            'url("./img/chestItems/key.png")';
+          setTimeout(function () {
+            document.getElementById('key').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest8() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest8');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/rocket.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest8');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/star.gif")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest9() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest9');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/stew.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest9');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/totem.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function chest10() {
+        if (chestSide === 1) {
+          console.log(chestSide);
+          console.log('chest10');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/bucket.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 2) {
+          console.log(chestSide);
+          console.log('chest10');
+          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.backgroundImage =
+            'url("./img/chestItems/chestplate.png")';
+          setTimeout(function () {
+            document.getElementById('chestItem').style.backgroundImage = 'none';
+          }, 5000);
+        }
+        if (chestSide === 0) {
+          console.log(chestSide);
+        }
+      }
+      function theKey() {}
+      function keyOnHand() {}
     </script>
   </body>
 </html>
