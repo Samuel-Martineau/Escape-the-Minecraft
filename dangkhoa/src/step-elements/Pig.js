@@ -72,6 +72,8 @@ export class Pig extends GameElement {
 
         inventory.grid.removeItem(draggedItemX, draggedItemY);
 
+        console.log(inventory.grid.isEmpty());
+
         if (inventory.grid.isEmpty()) {
           speech.remove();
           pigSatisfiedCallback();

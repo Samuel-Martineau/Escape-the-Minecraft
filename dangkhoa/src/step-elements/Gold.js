@@ -14,7 +14,7 @@ function grabPickaxe(e) {
 }
 
 export class Gold extends GameElement {
-  constructor(goldMinedCallback) {
+  constructor(inventory, goldMinedCallback) {
     super();
 
     // Create Gold Area
@@ -42,12 +42,15 @@ export class Gold extends GameElement {
           clearInterval(miningInterval);
           window.HTMLFrame.removeEventListener('mousemove', grabPickaxe);
           document.body.style.cursor = null;
-          goldMinedCallback();
+          inventory.grid.removeItem(
+            pickaxeItem.html.itemPositionX,
+            pickaxeItem.html.itemPositionY,
+          );
           pickaxeImage.remove();
-          pickaxeItem.destroy();
           gold.destroy();
+          goldMinedCallback();
         }, 3000);
-        pickaxeImage.style.animation = 'usePickaxe 1s infinite';
+        pickaxeImage.style.animation = 'usePickaxe 0.8s infinite';
       }
     });
 

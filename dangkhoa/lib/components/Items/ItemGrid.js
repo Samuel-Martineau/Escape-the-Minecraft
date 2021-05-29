@@ -122,6 +122,7 @@ export class ItemGrid extends GameElement {
 
   isEmpty() {
     const flatArray = [].concat.apply([], this.html.itemMapping);
+    console.log(flatArray);
     return flatArray.every((i) => i === undefined);
   }
 

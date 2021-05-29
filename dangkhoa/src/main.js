@@ -37,7 +37,7 @@ const steps = [
   // Step 2
   () => {
     nextFrame(1);
-    const gold = new Gold(() => {
+    const gold = new Gold(inventory, () => {
       nextStep();
     });
     if (!inventory.grid.hasItem('stone_pickaxe.png'))
@@ -62,6 +62,8 @@ const steps = [
   () => {
     nextFrame(3);
     solution(['Vous avez fini!']);
+    inventory.destroy();
+    inventory.grid.destroy();
     const end = new End(() => {
       window.parent.nextPerson();
     });
@@ -69,7 +71,7 @@ const steps = [
 ];
 
 // Start game
-nextStep();
+nextStep(2);
 
 function nextStep(stepNumber) {
   const index = stepNumber - 1;
