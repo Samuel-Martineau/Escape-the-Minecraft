@@ -37,6 +37,21 @@ var placedLetters = [];
 var letterCode = ["a", "l", "p", "h", "a", "b", "e", "t"];
 var vaultArrival = document.getElementById("vaultArrival");
 vaultArrival.pause();
+var morseBookBox = document.getElementById("morseBookBox");
+var morseBook = document.getElementById("morseBook");
+var morseBookPage1 = document.getElementById("morseBookPage1");
+var morseBookPage2 = document.getElementById("morseBookPage2");
+var page2Btn = document.getElementById("page2Btn");
+var page1Btn = document.getElementById("page1Btn");
+var morseBookFound = false;
+var codeBtnBox = document.getElementById("codeBtnBox");
+var enteredSecondLevel = false;
+
+addEventListener("keydown", (Event) => {
+  if (Event.keyCode == 27) {
+    closeDisplays();
+  }
+});
 
 function paper1Appear() {
   npc1.style.display = "none";
@@ -91,10 +106,13 @@ function paperAppear() {
     paper1.style.display = "none";
     paper2.style.display = "none";
     paper3.style.display = "none";
-  }, 2000);
+    paper.style.cursor = "pointer";
+    paper.onclick = openPaper;
+  }, 1000);
 }
 
 function openPaper() {
+  console.log("Énigme 1: Arrangez les lettres pour former le mot Alphabet");
   paper.classList.remove("fullPaper");
   paper.classList.remove("paperAnimation1");
   paper.classList.add("paperAnimation2");
@@ -144,9 +162,74 @@ function drop(ev) {
   });
 
   if (placedLetters.toString() == letterCode.toString()) {
-    paper.style.display = "none";
-    letterBox.style.display = "none";
-    vaultArrival.style.display = "block";
-    vaultArrival.play();
+    setTimeout(function () {
+      paper.style.display = "none";
+      letterBox.style.display = "none";
+      vaultArrival.style.display = "block";
+      vaultArrival.play();
+    }, 1000);
+
+    setTimeout(function () {
+      morseBookBox.style.display = "block";
+      codeBtnBox.style.display = "block";
+      enteredSecondLevel = true;
+    }, 16000);
   }
+}
+
+function skipFirstLevel() {
+  vaultArrival.style.display = "block";
+  vaultArrival.play();
+  npc1.style.display = "none";
+  npc2.style.display = "none";
+  npc3.style.display = "none";
+  morseBookBox.style.display = "block";
+  codeBtnBox.style.display = "block";
+  enteredSecondLevel = true;
+}
+
+function foundMorseBook() {
+  morseBookBox.style.display = "none";
+  morseBook.style.display = "block";
+  morseBook.classList.add("morseBookAnimation");
+  morseBook.classList.remove("morseBook");
+
+  setTimeout(function () {
+    morseBook.style.cursor = "pointer";
+    morseBook.onclick = openMorseBookPage1;
+    morseBookFound = true;
+
+    morseBook.classList.add("morseBookFinalPlace");
+    morseBook.classList.remove("morseBookAnimation");
+  }, 4000);
+}
+
+function openMorseBookPage1() {
+  morseBook.style.display = "none";
+  morseBookPage1.style.display = "block";
+  morseBookPage2.style.display = "none";
+  page2Btn.style.display = "block";
+  page1Btn.style.display = "none";
+}
+
+function openMorseBookPage2() {
+  morseBook.style.display = "none";
+  morseBookPage1.style.display = "none";
+  morseBookPage2.style.display = "block";
+  page2Btn.style.display = "none";
+  page1Btn.style.display = "block";
+}
+
+function closeDisplays() {
+  if (morseBookFound == true) {
+    morseBook.style.display = "block";
+    morseBookPage1.style.display = "none";
+    morseBookPage2.style.display = "none";
+    page2Btn.style.display = "none";
+    page1Btn.style.display = "none";
+  }
+}
+
+function openCodeInterface() {
+  codeBtnBox.style.display = "none";
 }
