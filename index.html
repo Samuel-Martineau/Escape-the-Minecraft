@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="./assets/grass.png" />
     <title>Escape the Minecraft</title>
     <style>
       html,
@@ -26,7 +27,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        font-family: "Montserrat", sans-serif;
+        font-family: 'Montserrat', sans-serif;
         color: white;
         background: rgba(0, 0, 0, 0.65) url(./assets/dirt.png);
         background-blend-mode: darken;
@@ -34,6 +35,7 @@
         image-rendering: pixelated;
         image-rendering: -moz-crisp-edges;
         image-rendering: crisp-edges;
+        user-select: none;
       }
 
       main {
@@ -78,72 +80,104 @@
         left: 50px;
       }
 
-      #music-btn {
+      #music-btn[data-enabled='true'] #music-btn-disabled {
+        display: none;
+      }
+
+      #music-btn[data-enabled='false'] #music-btn-enabled {
+        display: none;
+      }
+
+      #icons-container {
+        display: flex;
         padding: 0;
         margin: 0;
         position: absolute;
         top: 50px;
         right: 50px;
         cursor: pointer;
-        user-select: none;
+      }
+
+      #icons-container h1 {
+        padding: 10px 20px;
+        margin: 0;
         opacity: 0.7;
         transition: 500ms;
       }
 
-      #music-btn:hover {
+      #icons-container h1:hover {
         opacity: 1;
       }
 
-      #music-btn[data-enabled="true"] #music-btn-disabled {
+      #instructions {
+        color: black;
+        background-color: white;
+        padding: 50px;
+        border-radius: 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
         display: none;
       }
 
-      #music-btn[data-enabled="false"] #music-btn-enabled {
+      #overlay {
+        opacity: 0.5;
+        background-color: black;
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
         display: none;
       }
     </style>
   </head>
   <body>
+    <div id="overlay" onclick="toggleInstructions()"></div>
+    <div id="instructions">
+      <h2 style="text-align: center">Instructions</h2>
+      <ul>
+        <li>
+          Vous pouvez éteindre et allumer la musique en faisant un click sur le
+          bouton en haut à droite de votre écran
+        </li>
+        <li>
+          Lorsque votre votre curseur se transforme, c'est un indice que vous
+          pouvez intéragir avec cet élément du jeu
+        </li>
+        <li>
+          Vous aurez 45 minutes pour terminer le jeu. Vous pouvez voir le temps
+          restant en haut à gauche de votre écran
+        </li>
+        <li>
+          Si vous n'avez pas fini lorsque le temps sera écoulé, vous aurez perdu
+        </li>
+        <li>
+          Si vous ne réussissez pas une des énigmes, vous pourrez voir la
+          solution dans la console du navigateur
+        </li>
+      </ul>
+    </div>
+
     <h1 id="timer"></h1>
 
-    <h1 id="music-btn" data-enabled="false">
-      <span id="music-btn-enabled">🔊</span>
-      <span id="music-btn-disabled">🔈</span>
-    </h1>
+    <div id="icons-container">
+      <h1 id="music-btn" data-enabled="false">
+        <span id="music-btn-enabled">🔊</span>
+        <span id="music-btn-disabled">🔈</span>
+      </h1>
+
+      <h1 id="instructions-btn" onclick="toggleInstructions()">
+        <span>ℹ️</span>
+      </h1>
+    </div>
 
     <audio src="./assets/music.ogg"></audio>
 
     <h1>Escape the Minecraft</h1>
-
-    <hr />
-
-    <details open>
-      <summary><b>Instructions</b></summary>
-      <span>
-        <p>Appuyer sur Instructions pour ouvrir et fermer les instructions</p>
-        <p>
-          Vous pouvez éteindre et allumer la musique en faisant un click sur le
-          bouton en haut à droite de votre écrant
-        </p>
-        <p>
-          Lorsque votre votre curseur se transforme, c'est un indice que vous
-          pouvez intéragir avec cet élément du jeu
-        </p>
-        <p>
-          Vous aurez 45 minutes pour terminer le jeu. Vous pouvez voir le temps
-          restant en haut à gauche de votre écran.
-        </p>
-        <p>
-          Si vous n'avez pas fini lorsque le temps sera écoulé, vous aurez perdu
-        </p>
-        <p>
-          Si vous ne réussissez pas une des énigmes, vous pourrez voir la
-          solution dans la console du navigateur
-        </p>
-      </span>
-    </details>
-
-    <hr />
 
     <b>Jeu de <span id="name"></span></b>
     <main>
@@ -154,7 +188,7 @@
     </main>
     <!-- Minuteur -->
     <script>
-      const timer = document.querySelector("#timer");
+      const timer = document.querySelector('#timer');
 
       let time = 45 * 60;
 
@@ -167,9 +201,9 @@
           let seconds = time % 60;
           let minutes = (time - seconds) / 60;
 
-          timer.textContent = `${minutes.toLocaleString("fr-ca", {
+          timer.textContent = `${minutes.toLocaleString('fr-ca', {
             minimumIntegerDigits: 2,
-          })}:${seconds.toLocaleString("fr-ca", {
+          })}:${seconds.toLocaleString('fr-ca', {
             minimumIntegerDigits: 2,
           })}`;
         }
@@ -177,44 +211,62 @@
     </script>
     <!-- Musique -->
     <script>
-      const musicBtn = document.querySelector("#music-btn");
-      const music = document.querySelector("audio");
+      const musicBtn = document.querySelector('#music-btn');
+      const music = document.querySelector('audio');
 
       let isMusicEnabled = false;
 
-      musicBtn.addEventListener("click", () => {
+      musicBtn.addEventListener('click', () => {
         isMusicEnabled = !isMusicEnabled;
         if (isMusicEnabled) music.play();
         else music.pause();
 
-        musicBtn.setAttribute("data-enabled", isMusicEnabled);
+        musicBtn.setAttribute('data-enabled', isMusicEnabled);
       });
+    </script>
+    <!-- Instructions -->
+    <script>
+      let showInstructions = false;
+
+      function toggleInstructions() {
+        const instructions = document.querySelector('#instructions');
+        const overlay = document.querySelector('#overlay');
+
+        showInstructions = !showInstructions;
+        if (showInstructions) {
+          instructions.style.display = 'block';
+          overlay.style.display = 'block';
+        } else {
+          instructions.style.display = 'none';
+          overlay.style.display = 'none';
+        }
+      }
     </script>
     <!-- Personnes -->
     <script>
-      const iframe = document.querySelector("iframe");
-      const nameSpan = document.querySelector("#name");
+      const iframe = document.querySelector('iframe');
+      const nameSpan = document.querySelector('#name');
 
       const people = [
         {
-          id: "sm",
-          name: "Samuel Martineau, Groupe 404",
-          game: "./samuel/index.html",
+          id: 'sm',
+          name: 'Samuel Martineau, Groupe 404',
+          game: './samuel/index.html',
         },
         {
-          id: "vc",
-          name: "Vu Dang Khoa Chiem, Groupe 403",
-          game: "./dangkhoa/index.html",
+          id: 'vc',
+          name: 'Vu Dang Khoa Chiem, Groupe 403',
+          game: './dangkhoa/index.html',
         },
         {
-          id: "jr",
-          name: "Jun Ru, Groupe 405",
-          game: "./junru/index.html",
+          id: 'jr',
+          name: 'Jun Ru, Groupe 405',
+          game: './junru/index.html',
         },
         {
-          id: "mg",
-          name: "Mathieu Guimond, Groupe 405",
-          game: "./mathieu/index.html",
+          id: 'mg',
+          name: 'Mathieu Guimond, Groupe 405',
+          game: './mathieu/index.html',
         },
       ];
       let index = -1;
@@ -231,17 +283,17 @@
 
       function showDefeat() {
         index = -1;
-        iframe.src = "./end.html?screen=defeat";
-        nameSpan.textContent = "TOUS";
+        iframe.src = './end.html?screen=defeat';
+        nameSpan.textContent = 'TOUS';
       }
 
       function showVictory() {
         index = -1;
-        iframe.src = "./end.html?screen=victory";
-        nameSpan.textContent = "TOUS";
+        iframe.src = './end.html?screen=victory';
+        nameSpan.textContent = 'TOUS';
       }
 
-      const person = new URLSearchParams(window.location.search).get("person");
+      const person = new URLSearchParams(window.location.search).get('person');
 
       if (person) {
         index = people.findIndex((p) => p.id === person) - 1;

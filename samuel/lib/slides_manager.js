@@ -71,6 +71,8 @@ export class SlidesManager {
       slideElement: this.current.element,
       slidesManager: this,
     });
+    const { clue } = this.current.controller;
+    if (clue) console.log(clue);
 
     previous?.element.removeAttribute("data-shown");
     previous?.controller.onHide({
