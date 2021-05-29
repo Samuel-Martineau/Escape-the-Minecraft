@@ -212,6 +212,9 @@
       onclick=""
     />
 
+    <p class="morseBookExit" id="morseBookExit">
+      Appuyez sur Esc pour fermer l'interface
+    </p>
     <img
       src="Images/morseBook1.png"
       alt="morseBook1"
@@ -228,7 +231,25 @@
     <div class="page2Btn" id="page2Btn" onclick="openMorseBookPage2()"></div>
     <div class="page1Btn" id="page1Btn" onclick="openMorseBookPage1()"></div>
 
-    <div class="codeBtnBox" id="codeBtnBox"></div>
+    <div class="aerialViewBtn" id="aerialViewBtn" onclick="toggleAerialView()">
+      Vue aérienne
+    </div>
+
+    <p class="codeInterfaceExit" id="codeInterfaceExit">
+      Appuyez sur Esc pour fermer l'interface
+    </p>
+    <div class="codeBtnBox" id="codeBtnBox" onclick="openCodeInterface()"></div>
+    <div class="codeInterface" id="codeInterface">
+      <p id="codeInterfaceMessage">Entrez votre code</p>
+      <input type="text" class="codeInput" id="codeInput" />
+      <div class="submitCodeBtn" id="submitCodeBtn" onclick="enterCode()">
+        Soumettre
+      </div>
+    </div>
+
+    <video class="gameComplete" id="gameComplete" muted autoplay>
+      <source src="Videos/gameComplete.mp4" />
+    </video>
 
     <script src="main.js"></script>
   </body>

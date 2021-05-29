@@ -46,6 +46,17 @@ var page1Btn = document.getElementById("page1Btn");
 var morseBookFound = false;
 var codeBtnBox = document.getElementById("codeBtnBox");
 var enteredSecondLevel = false;
+var codeInterface = document.getElementById("codeInterface");
+var submitCodeBtn = document.getElementById("submitCodeBtn");
+var code = "adimrt";
+var morseBookExit = document.getElementById("morseBookExit");
+var codeInterfaceExit = document.getElementById("codeInterfaceExit");
+var aerialView = false;
+var body = document.body;
+var aerialViewBtn = document.getElementById("aerialViewBtn");
+var codeInterfaceMessage = document.getElementById("codeInterfaceMessage");
+var gameComplete = document.getElementById("gameComplete");
+gameComplete.pause();
 
 addEventListener("keydown", (Event) => {
   if (Event.keyCode == 27) {
@@ -162,30 +173,24 @@ function drop(ev) {
   });
 
   if (placedLetters.toString() == letterCode.toString()) {
+    vaultArrival.style.display = "block";
+    vaultArrival.classList.add("cinematicAnimation");
+
     setTimeout(function () {
       paper.style.display = "none";
       letterBox.style.display = "none";
-      vaultArrival.style.display = "block";
       vaultArrival.play();
-    }, 1000);
+    }, 2000);
 
     setTimeout(function () {
       morseBookBox.style.display = "block";
       codeBtnBox.style.display = "block";
       enteredSecondLevel = true;
-    }, 16000);
-  }
-}
+      aerialViewBtn.style.display = "block";
 
-function skipFirstLevel() {
-  vaultArrival.style.display = "block";
-  vaultArrival.play();
-  npc1.style.display = "none";
-  npc2.style.display = "none";
-  npc3.style.display = "none";
-  morseBookBox.style.display = "block";
-  codeBtnBox.style.display = "block";
-  enteredSecondLevel = true;
+      console.log("Énigme 2: Entrez le code ADIMRT en appuyant sur le lutrin");
+    }, 18000);
+  }
 }
 
 function foundMorseBook() {
@@ -210,6 +215,9 @@ function openMorseBookPage1() {
   morseBookPage2.style.display = "none";
   page2Btn.style.display = "block";
   page1Btn.style.display = "none";
+  morseBookExit.style.display = "block";
+
+  codeBtnBox.style.display = "none";
 }
 
 function openMorseBookPage2() {
@@ -227,9 +235,77 @@ function closeDisplays() {
     morseBookPage2.style.display = "none";
     page2Btn.style.display = "none";
     page1Btn.style.display = "none";
+    morseBookExit.style.display = "none";
+
+    if (aerialView == false) {
+      codeBtnBox.style.display = "block";
+    }
+  }
+  if (enteredSecondLevel == true && aerialView == false) {
+    codeBtnBox.style.display = "block";
+    codeInterface.style.display = "none";
+    codeInterfaceExit.style.display = "none";
+
+    morseBook.onclick = openMorseBookPage1;
+    morseBook.style.cursor = "pointer";
   }
 }
 
 function openCodeInterface() {
   codeBtnBox.style.display = "none";
+  codeInterface.style.display = "block";
+  codeInterfaceExit.style.display = "block";
+
+  morseBook.onclick = "";
+  morseBook.style.cursor = "default";
+}
+
+function enterCode() {
+  var codeInput = document.getElementById("codeInput").value;
+  var enteredCode = codeInput.toLowerCase();
+
+  if (enteredCode == code) {
+    morseBookBox.style.display = "none";
+    morseBook.style.display = "none";
+    codeBtnBox.style.display = "none";
+    aerialViewBtn.style.display = "none";
+    codeInterface.style.display = "none";
+    codeInterfaceExit.style.display = "none";
+
+    vaultArrival.style.display = "none";
+    gameComplete.style.display = "block";
+    gameComplete.play();
+
+    setTimeout(function () {
+      window.parent.showVictory();
+    }, 20000);
+  } else {
+    codeInterfaceMessage.innerText = "Essayez de nouveau";
+    setTimeout(function () {
+      codeInterfaceMessage.innerText = "Entrez votre code";
+    }, 3000);
+  }
+}
+
+function toggleAerialView() {
+  if (aerialView == false) {
+    vaultArrival.style.display = "none";
+    body.style.backgroundImage = "url(Images/aerialView.png)";
+    aerialViewBtn.innerText = "Vue du sol";
+    aerialView = true;
+
+    codeBtnBox.style.display = "none";
+    if (morseBookFound == false) {
+      morseBookBox.style.display = "none";
+    }
+  } else {
+    vaultArrival.style.display = "block";
+    aerialViewBtn.innerText = "Vue aérienne";
+    aerialView = false;
+
+    codeBtnBox.style.display = "block";
+    if (morseBookFound == false) {
+      morseBookBox.style.display = "block";
+    }
+  }
 }
