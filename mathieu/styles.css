@@ -344,4 +344,100 @@ body {
   left: 41%;
   top: 54.5%;
   cursor: pointer;
+  display: none;
+}
+
+.codeInterface {
+  background-image: url("Images/codeInterfaceBackground.png");
+  background-position: center;
+  width: 40%;
+  height: 39%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+}
+
+.codeInput {
+  text-align: center;
+  margin-top: 2%;
+  text-transform: uppercase;
+}
+
+.submitCodeBtn {
+  cursor: pointer;
+  margin-top: 5%;
+  padding: 3%;
+  background-image: url("Images/codeInterfaceBackground.png");
+  background-position: center;
+  position: absolute;
+  border: 4px solid black;
+  border-radius: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.morseBookExit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 5%;
+  cursor: default;
+  color: #f2f2f2;
+  display: none;
+}
+
+.codeInterfaceExit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  cursor: default;
+  color: #f2f2f2;
+  display: none;
+}
+
+.aerialViewBtn {
+  text-align: center;
+  width: 9%;
+  height: 10%;
+  position: absolute;
+  right: 2%;
+  top: 3%;
+  cursor: pointer;
+  background-image: url("Images/codeInterfaceBackground.png");
+  background-position: center;
+  border: 2px solid black;
+  border-radius: 3px;
+  opacity: 0.5;
+  transition: 300ms;
+  display: none;
+}
+
+.aerialViewBtn:hover {
+  opacity: 1;
+}
+
+.gameComplete {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes cinematicTransition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cinematicAnimation {
+  animation-name: cinematicTransition;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
