@@ -2,10 +2,11 @@ import { SHOW_CLICKABLE } from '../../env.js';
 import { GuiElement } from '../GuiElement.js';
 
 export class Area extends GuiElement {
-  constructor(size, position, zIndex) {
+  constructor(size, position, cursor, zIndex) {
     super();
     this.size = size;
     this.position = position;
+    this.cursor = cursor ?? 'pointer';
     this.zIndex = zIndex ?? 1000;
 
     // Create Clickable Area
@@ -16,7 +17,7 @@ export class Area extends GuiElement {
     }
     this.html.style.position = 'absolute';
     this.html.style.zIndex = zIndex;
-    this.html.style.cursor = 'pointer';
+    this.html.style.cursor = this.cursor;
     this.html.style.width = this.size.width + this.size.unit;
     this.html.style.height = this.size.height + this.size.unit;
     if (this.position.top) this.html.style.top = this.position.top;

@@ -13,12 +13,15 @@ let currentFrameIndex = -1;
 let currentStepIndex = -1;
 
 const inventory = new Inventory();
+const pickaxeItem = new Item('stone_pickaxe.png');
+let hasPickaxe = false;
 
 const steps = [
   () => {
     nextFrame();
     initChest();
     initCrafter();
+    initGold();
   },
   () => {
     // if (!inventory.grid.hasItem('stone_pickaxe.png'))
@@ -40,26 +43,45 @@ function nextFrame() {
 }
 
 function giveStonePickaxe() {
-  const pickaxeItem = new Item('stone_pickaxe.png');
-  pickaxeItem.addEventListener('click', () => {
+  const pickaxeImage = document.createElement('img');
+  pickaxeImage.src = 'images/items/stone_pickaxe.png';
+  pickaxeImage.style.width = '80px';
+  pickaxeImage.style.height = '80px';
+  pickaxeImage.style.position = 'fixed';
+  pickaxeImage.style.imageRendering = 'pixelated';
+  pickaxeImage.style.imageRendering = '-moz-crisp-edges';
+  pickaxeImage.style.imageRendering = 'crisp-edges';
+  pickaxeImage.style.display = 'none';
+  window.HTMLFrame.appendChild(pickaxeImage);
+  pickaxeItem.addEventListener('click', (e) => {
+    const grabPickaxe = (e) => {
+      pickaxeImage.style.top = e.clientY - 40 + 'px';
+      pickaxeImage.style.left = e.clientX - 40 + 'px';
+      document.body.style.cursor = 'grabbing';
+    };
     if (inventory.grid.hasItem('stone_pickaxe.png')) {
-      const pickaxeImage = document.createElement('img');
-      pickaxeImage.src = 'images/items/stone_pickaxe.png';
-      pickaxeImage.style.width = '80px';
-      pickaxeImage.style.height = '80px';
-      pickaxeImage.style.position = 'fixed';
-      pickaxeImage.style.imageRendering = 'pixelated';
-      pickaxeImage.style.imageRendering = '-moz-crisp-edges';
-      pickaxeImage.style.imageRendering = 'crisp-edges';
-      window.HTMLFrame.appendChild(pickaxeImage);
-      window.HTMLFrame.addEventListener('mousemove', (e) => {
-        pickaxeImage.style.top = e.clientY - 40 + 'px';
-        pickaxeImage.style.left = e.clientX - 40 + 'px';
-        document.body.style.cursor = 'grabbing';
-      });
+      window.HTMLFrame.addEventListener('mousemove', grabPickaxe);
+      // pickaxeImage.style.display = 'none';
+      //   window.HTMLFrame.removeEventListener('mousemove', grabPickaxe);
+      //   pickaxeItem.hide();
+      pickaxeImage.style.display = null;
+      pickaxeItem.show();
     }
   });
   return pickaxeItem;
+}
+
+function initGold() {
+  const gold = new Area(
+    new Size(17, 20),
+    new Position('45%', undefined, undefined, '5%'),
+    '',
+  );
+  gold.addEventListener('mouseover', () => {
+    if (hasPickaxe) {
+      console.log('Yay');
+    }
+  });
 }
 
 function initCrafter() {
