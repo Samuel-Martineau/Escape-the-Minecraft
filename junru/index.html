@@ -5,30 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape Minecraft</title>
     <style>
+      #bypass {
+        position: absolute;
+        left: 2%;
+        bottom: 2%;
+        width: 2.5%;
+        height: 4%;
+        background-color: white;
+      }
       #cin1 {
         display: fixed;
         position: fixed;
         right: 0;
         bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
+        width: 100%;
+        height: 100%;
         opacity: 100;
       }
       body {
-        background-image: url('./img/coffresDroite.png');
+        background-image: none;
         background-size: cover;
       }
       #hintBook {
         display: none;
-        width: 50px;
-        height: 50px;
+        width: 3%;
+        height: 5%;
         position: absolute;
-        right: 800px;
-        bottom: 450px;
+        left: 56%;
+        top: 43%;
       }
       #hints {
         display: none;
-        width: 400px;
+        width: 20%;
         image-rendering: pixelated;
         image-rendering: -moz-crisp-edges;
         image-rendering: crisp-edges;
@@ -38,101 +46,114 @@
         position: fixed;
         right: 0;
         bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
+        width: 100%;
+        height: 100%;
         opacity: 100;
       }
-      #chest1{
-        width: 190px;
-        height: 60px;
+      #chest1 {
+        display: none;
+        width: 11%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 18%;
+        top: 41%;
         background-color: white;
       }
-      #chest2{
-        width: 180px;
-        height: 60px;
+      #chest2 {
+        display: none;
+        width: 9%;
+        height: 6%;
         position: absolute;
-        left: 620px;
-        top: 450px;
+        left: 32%;
+        top: 41%;
         background-color: white;
       }
-      #chest3{
-        width: 160px;
-        height: 60px;
+      #chest3 {
+        display: none;
+        width: 8%;
+        height: 6%;
         position: absolute;
-        left: 875px;
-        top: 450px;
+        left: 46%;
+        top: 41%;
         background-color: white;
       }
-      #chest4{
-        width: 180px;
-        height: 60px;
+      #chest4 {
+        display: none;
+        width: 9%;
+        height: 6%;
         position: absolute;
-        left: 1000px;
-        top: 450px;
+        left: 59%;
+        top: 41%;
         background-color: white;
       }
-      #chest5{
-        width: 190px;
-        height: 60px;
+      #chest5 {
+        display: none;
+        width: 11%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 71%;
+        top: 41%;
         background-color: white;
       }
-      #chest6{
-        width: 190px;
-        height: 60px;
+      #chest6 {
+        display: none;
+        width: 11%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 18%;
+        top: 57%;
         background-color: white;
       }
-      #chest7{
-        width: 190px;
-        height: 60px;
+      #chest7 {
+        display: none;
+        width: 9%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 32%;
+        top: 57%;
         background-color: white;
       }
-      #chest8{
-        width: 190px;
-        height: 60px;
+      #chest8 {
+        display: none;
+        width: 8%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 46%;
+        top: 57%;
         background-color: white;
       }
-      #chest9{
-        width: 190px;
-        height: 60px;
+      #chest9 {
+        display: none;
+        width: 9%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 59%;
+        top: 57%;
         background-color: white;
       }
-      #chest10{
-        width: 190px;
-        height: 60px;
+      #chest10 {
+        display: none;
+        width: 11%;
+        height: 6%;
         position: absolute;
-        left: 360px;
-        top: 450px;
+        left: 71%;
+        top: 57%;
         background-color: white;
       }
     </style>
   </head>
   <body>
-    video playsinline autoplay muted id="cin1">
+    <video playinsline autoplay muted id="cin1">
       <source src="./vid/1cin.mov" type="video/mp4" />
     </video>
     <div id="hintBook" onClick="hints()"></div>
     <img src="./img/indices.png" id="hints" />
-    <video muted id="cin2">
+    <video playinsline muted id="cin2">
       <source src="./vid/2cin.mp4" type="video/mp4" />
     </video>
+
+    <div id="bypass" onClick="playVid()"></div>
+
     <div id="chest1"></div>
     <div id="chest2"></div>
     <div id="chest3"></div>
@@ -199,33 +220,79 @@
         'w',
       ];
       var currentStepIndex = 0;
-
+      function invPath() {
+        document.body.style.backgroundImage = 'url("./img/0.png")';
+      }
       function checkStep(key) {
         if (key === steps[currentStepIndex]) {
           console.log('ok: ' + key);
           if (currentStepIndex <= steps.length) {
             currentStepIndex++;
+            document.body.style.backgroundImage = `url(./img/${currentStepIndex}.png)`;
+            if (currentStepIndex == steps.length) {
+              document.getElementById('hints').style.display = 'none';
+              setTimeout(playVid(), 500);
+            }
           }
-          document.body.style.backgroundImage = `url(./img/${currentStepIndex}.png)`;
         } else {
           console.log('recommencer');
+
+          document.body.style.backgroundImage = 'url("./img/inLava/1.png")';
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/2.png")';
+          }, 200);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/3.png")';
+          }, 400);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/4.png")';
+          }, 600);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/5.png")';
+          }, 800);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/6.png")';
+          }, 1000);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/7.png")';
+          }, 1200);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/8.png")';
+          }, 1400);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/9.png")';
+          }, 1600);
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/inLava/10.png")';
+          }, 1800);
+
+          setTimeout(function () {
+            document.body.style.backgroundImage = 'url("./img/0.png")';
+          }, 2000);
           currentStepIndex = 0;
-          document.body.style.backgroundImage = 'url("./img/inLava1.png")';
-          setTimeout(
-            (document.body.style.backgroundImage = 'url("./img/inLava2.png")'),
-            1000,
-          );
         }
       }
+      var vid = document.getElementById('cin2');
 
-      function resInvPath() {
-        i = 0;
-        invPath();
+      function playVid() {
+        document.getElementById('cin2').style.display = 'flex';
+        vid.play();
+        console.log(vid);
+        document.body.style.backgroundImage = 'url("./img/coffresMid.png")';
+        setTimeout(function () {
+          document.getElementById('cin2').style.display = 'none';
+        }, 10000);
       }
-      function invPath() {
-        document.body.style.backgroundImage = 'url("./img/0.png")';
+      function changeChest() {
+        if (key == 'a') {
+          document.body.style.backgroundImage =
+            'url("./img/coffresGauche.png")';
+        }
+        if (key == 'd') {
+          document.body.style.backgroundImage =
+            'url("./img/coffresDroite.png")';
+        }
       }
-      function cin2() {}
     </script>
   </body>
 </html>
