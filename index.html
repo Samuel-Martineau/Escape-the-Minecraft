@@ -95,11 +95,10 @@
         top: 50px;
         right: 50px;
         cursor: pointer;
-        user-select: none;
       }
 
       #icons-container h1 {
-        padding: 10px;
+        padding: 10px 20px;
         margin: 0;
         opacity: 0.7;
         transition: 500ms;
@@ -261,6 +260,7 @@
         const instructions = document.querySelector('#instructions');
         const overlay = document.querySelector('#overlay');
 
+        showInstructions = !showInstructions;
         if (showInstructions) {
           instructions.style.display = 'block';
           overlay.style.display = 'block';
@@ -268,7 +268,6 @@
           instructions.style.display = 'none';
           overlay.style.display = 'none';
         }
-        showInstructions = !showInstructions;
       }
     </script>
     <!-- Personnes -->
