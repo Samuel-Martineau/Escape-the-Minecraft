@@ -97,5 +97,5 @@ function solution(solutionSteps) {
   solutionSteps.forEach((step, i) => {
     text += `${i + 1}. ${step}\n`;
   });
-  console.log(text, 'color:yellow;font-weight:bold;');
+  console.log(text, 'font-weight:bold;');
 }

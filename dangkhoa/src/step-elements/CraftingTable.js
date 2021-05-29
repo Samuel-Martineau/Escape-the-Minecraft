@@ -54,6 +54,7 @@ export class CraftingTable extends GameElement {
           // Go to nextFrame if pickaxe has been crafted and taken
           if (pickaxeGrid.isEmpty()) {
             craftingTable.destroy();
+            pickaxeGrid.destroy();
             pickaxeHasBeenTakenCallback();
           } else {
             pickaxeItem.hide();
