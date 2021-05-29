@@ -71,7 +71,7 @@ const steps = [
 ];
 
 // Start game
-nextStep(2);
+nextStep();
 
 function nextStep(stepNumber) {
   const index = stepNumber - 1;
