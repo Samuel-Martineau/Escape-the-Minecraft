@@ -17,6 +17,10 @@ export class Pig extends GameElement {
     speech.style.height = '25%';
     window.HTMLFrame.appendChild(speech);
 
+    const angryPig = new Audio('sounds/angryPig.mp3');
+    angryPig.volume = 0.2;
+    angryPig.play();
+
     // Create Chest Area
     const pig = new Area(
       new Size(8, 26),
@@ -47,6 +51,9 @@ export class Pig extends GameElement {
       pig.html.style.backgroundColor = null;
 
       if (draggedItemHTML.imagePath === 'gold.png') {
+        const pig = new Audio('sounds/pig.mp3');
+        pig.play();
+
         const draggedItemX =
           parseInt(
             draggedItemHTML.parentElement.classList[0].replace(

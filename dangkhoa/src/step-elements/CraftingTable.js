@@ -48,7 +48,7 @@ export class CraftingTable extends GameElement {
 
       craftingTableGui.addEventListener(
         'close',
-        () => {
+        function close() {
           craftingTableGui.hide();
           craftingTableGrid.hide();
           // Go to nextFrame if pickaxe has been crafted and taken
@@ -58,6 +58,7 @@ export class CraftingTable extends GameElement {
           } else {
             pickaxeItem.hide();
           }
+          craftingTableGui.removeEventListener('close', close);
         },
         { once: true },
       );

@@ -26,10 +26,20 @@ export class Gold extends GameElement {
 
     // Add Event Listeners
     let hoverTime;
+    let isMining;
+
+    const miningAudio = new Audio('sounds/mining.mp3');
+    const miningInterval = setInterval(() => {
+      if (isMining) {
+        miningAudio.play();
+      }
+    }, 200);
 
     gold.addEventListener('mouseover', () => {
       if (holdingPickaxe) {
+        isMining = true;
         hoverTime = setTimeout(() => {
+          clearInterval(miningInterval);
           window.HTMLFrame.removeEventListener('mousemove', grabPickaxe);
           document.body.style.cursor = null;
           goldMinedCallback();
@@ -44,6 +54,7 @@ export class Gold extends GameElement {
     gold.addEventListener('mouseout', () => {
       if (holdingPickaxe) {
         clearTimeout(hoverTime);
+        isMining = false;
         pickaxeImage.style.animation = null;
       }
     });

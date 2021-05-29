@@ -44,15 +44,26 @@ export class Chest extends GameElement {
     chest.addEventListener('click', () => {
       chestGui.show();
       chestItemsGrid.show();
-      chestGui.addEventListener('close', () => {
-        chestGui.hide();
-        chestItemsGrid.hide();
-        if (chestItemsGrid.isEmpty()) {
-          chest.destroy();
-          chestGui.destroy();
-          chestItemsGrid.destroy();
-        }
-      });
+      const chestOpenSound = new Audio('sounds/chestopen.mp3');
+      chestOpenSound.volume = 0.2;
+      chestOpenSound.play();
+      chestGui.addEventListener(
+        'close',
+        function close() {
+          chestGui.hide();
+          chestItemsGrid.hide();
+          const chestClosedSound = new Audio('sounds/chestclosed.mp3');
+          chestClosedSound.volume = 0.2;
+          chestClosedSound.play();
+          if (chestItemsGrid.isEmpty()) {
+            chest.destroy();
+            chestGui.destroy();
+            chestItemsGrid.destroy();
+          }
+          chestGui.removeEventListener('close', close);
+        },
+        { once: true },
+      );
     });
   }
 }
