@@ -6,6 +6,7 @@
 
 /**
  * @typedef {Object} SlideController
+ * @property {string} [clue]
  * @property {Object} data Static data for the slide
  * @property {Object} state Current state of the slide
  * @property {(context: SlideControllerEventContext) => void} onInit Called when the slide is initialized (only called once)
