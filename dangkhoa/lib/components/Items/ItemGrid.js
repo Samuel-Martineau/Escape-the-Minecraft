@@ -1,8 +1,8 @@
-import { SHOW_CLICKABLE } from '../../../env.js';
+import { SHOW_CLICKABLE } from '../../../src/env.js';
 import { Item } from './Item.js';
-import { GuiElement } from '../../GuiElement.js';
+import { GameElement } from '../../GameElement.js';
 
-export class ItemGrid extends GuiElement {
+export class ItemGrid extends GameElement {
   constructor(itemWidth, itemHeight, position) {
     super();
     this.itemWidth = itemWidth;
@@ -39,16 +39,17 @@ export class ItemGrid extends GuiElement {
         itemContainer.style.outline = '2px white solid';
       };
 
-      itemContainer.ondragleave = (e) => {
+      itemContainer.ondragleave = () => {
         itemContainer.style.outline = null;
       };
 
       itemContainer.ondrop = (e) => {
         e.preventDefault();
-        itemContainer.style.outline = null;
         const childItem = itemContainer.querySelector('.item');
         const draggedItem = JSON.parse(e.dataTransfer.getData('text'));
         const draggedItemHTML = document.getElementById(draggedItem.id);
+
+        itemContainer.style.outline = null;
 
         if (!childItem) {
           const oldItemMapping =
@@ -80,10 +81,7 @@ export class ItemGrid extends GuiElement {
       };
     }
 
-    // Generate Item Mapping
-    this.html.itemMapping = Array.from(Array(this.itemHeight), () => {
-      return new Array(this.itemWidth).fill(undefined);
-    });
+    this.generateItemMapping();
 
     // Add to DOM
     window.HTMLFrame.appendChild(this.html);
@@ -104,6 +102,15 @@ export class ItemGrid extends GuiElement {
     }
   }
 
+  removeItem(x, y) {
+    this.html.itemMapping[y][x] = undefined;
+    this.html
+      .querySelector(
+        `.item-container-${this.itemWidth * (y + 1) - (this.itemWidth - x)}`,
+      )
+      .firstElementChild.remove();
+  }
+
   hasItem(itemImagePath) {
     const flatArray = [].concat.apply([], this.html.itemMapping);
     if (flatArray.indexOf(itemImagePath) !== -1) {
@@ -111,6 +118,17 @@ export class ItemGrid extends GuiElement {
     } else {
       return false;
     }
+  }
+
+  isEmpty() {
+    const flatArray = [].concat.apply([], this.html.itemMapping);
+    return flatArray.every((i) => i === undefined);
+  }
+
+  generateItemMapping() {
+    this.html.itemMapping = Array.from(Array(this.itemHeight), () => {
+      return new Array(this.itemWidth).fill(undefined);
+    });
   }
 
   show() {

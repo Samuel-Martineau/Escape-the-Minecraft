@@ -1,7 +1,7 @@
-import { SHOW_CLICKABLE } from '../../env.js';
-import { GuiElement } from '../GuiElement.js';
+import { SHOW_CLICKABLE } from '../../src/env.js';
+import { GameElement } from '../GameElement.js';
 
-export class Area extends GuiElement {
+export class Area extends GameElement {
   constructor(size, position, cursor, zIndex) {
     super();
     this.size = size;
@@ -24,12 +24,30 @@ export class Area extends GuiElement {
     if (this.position.right) this.html.style.right = this.position.right;
     if (this.position.bottom) this.html.style.bottom = this.position.bottom;
     if (this.position.left) this.html.style.left = this.position.left;
+
     this.html.addEventListener('click', () => {
       this.dispatchEvent(new Event('click'));
     });
+
     this.html.addEventListener('mouseover', () => {
       this.dispatchEvent(new Event('mouseover'));
     });
+
+    this.html.addEventListener('mouseout', () => {
+      this.dispatchEvent(new Event('mouseout'));
+    });
+
+    // this.html.addEventListener('dragover', () => {
+    //   this.dispatchEvent(new Event('dragover'));
+    // });
+
+    // this.html.addEventListener('dragleave', () => {
+    //   this.dispatchEvent(new Event('dragleave'));
+    // });
+
+    // this.html.addEventListener('drop', () => {
+    //   this.dispatchEvent(new Event('drop'));
+    // });
 
     // Add to DOM
     window.HTMLFrame.appendChild(this.html);
