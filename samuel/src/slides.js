@@ -64,6 +64,7 @@ const videoSlideController = () => ({
 export const slideControllers = [
   // Défi 1 -> Éteindre le feu avec le seau
   {
+    clue: "Déplacez le seau d'eau sur le feu pour l'éteindre",
     data: {
       bucket: {
         x: 0.483,
@@ -137,6 +138,7 @@ export const slideControllers = [
   },
   // Défi 2 -> Trouver la bonne combinaison de leviers en utilisant les lumières
   {
+    clue: "Les leviers à cliquer sont ceux proche de sources de lumière",
     data: {
       clickRadius: 0.035,
       levers: [
@@ -212,6 +214,7 @@ export const slideControllers = [
   automaticSlideController(500),
   // Défi 3 -> Se souvenir de la combinaison affichée
   {
+    clue: "En cliquant sur le coffre, une suite de couleur sera affichée. Vous devrez la répliquer en mettant les coraux dans les cadres",
     data: {
       clickRadius: 0.035,
       time: 1000,
@@ -430,6 +433,7 @@ export const slideControllers = [
   },
   // Défi 4 -> Simon
   {
+    clue: "Ce jeu est une réplique du jeu Simon (voir sur Wikipédia: https://fr.wikipedia.org/wiki/Simon_(jeu) )",
     data: {
       clickRadius: 0.05,
       maps: [
