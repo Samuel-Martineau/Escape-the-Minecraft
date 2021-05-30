@@ -181,7 +181,7 @@ function drop(ev) {
       letterBox.style.display = "none";
       vaultArrival.play();
       vaultArrival.classList.remove("cinematicAnimation");
-    }, 2000);
+    }, 1500);
 
     setTimeout(function () {
       morseBookBox.style.display = "block";
