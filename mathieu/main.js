@@ -48,7 +48,7 @@ var codeBtnBox = document.getElementById("codeBtnBox");
 var enteredSecondLevel = false;
 var codeInterface = document.getElementById("codeInterface");
 var submitCodeBtn = document.getElementById("submitCodeBtn");
-var code = "adimrt";
+var code = "aeimst";
 var morseBookExit = document.getElementById("morseBookExit");
 var codeInterfaceExit = document.getElementById("codeInterfaceExit");
 var aerialView = false;
@@ -57,6 +57,12 @@ var aerialViewBtn = document.getElementById("aerialViewBtn");
 var codeInterfaceMessage = document.getElementById("codeInterfaceMessage");
 var gameComplete = document.getElementById("gameComplete");
 gameComplete.pause();
+var grabSound = new Audio("Sounds/grab.wav");
+grabSound.volume = 1;
+var dropSound = new Audio("Sounds/drop.wav");
+var completeLevelSound = new Audio("Sounds/completeLevel.wav");
+var enterLevel2Sound = new Audio("Sounds/enterLevel2.wav");
+var gameCompleteSound = new Audio("Sounds/gameComplete.wav");
 
 addEventListener("keydown", (Event) => {
   if (Event.keyCode == 27) {
@@ -157,9 +163,12 @@ function allowDrop(ev) {
 
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
+  grabSound.play();
 }
 
 function drop(ev) {
+  dropSound.play();
+
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
   ev.target.appendChild(document.getElementById(data));
@@ -173,10 +182,14 @@ function drop(ev) {
   });
 
   if (placedLetters.toString() == letterCode.toString()) {
+    completeLevelSound.play();
+
     vaultArrival.style.display = "block";
     vaultArrival.classList.add("cinematicAnimation");
 
     setTimeout(function () {
+      enterLevel2Sound.play();
+
       paper.style.display = "none";
       letterBox.style.display = "none";
       vaultArrival.play();
@@ -266,6 +279,8 @@ function enterCode() {
   var enteredCode = codeInput.toLowerCase();
 
   if (enteredCode == code) {
+    gameCompleteSound.play();
+
     morseBookBox.style.display = "none";
     morseBook.style.display = "none";
     codeBtnBox.style.display = "none";
@@ -291,6 +306,7 @@ function enterCode() {
 function toggleAerialView() {
   if (aerialView == false) {
     vaultArrival.style.display = "none";
+    codeBtnBox.style.display = "none";
     body.style.backgroundImage = "url(Images/aerialView.png)";
     aerialViewBtn.innerText = "Vue du sol";
     aerialView = true;

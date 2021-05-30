@@ -13,10 +13,12 @@
     />
   </head>
   <body>
+    <!-- Ce sont les éléments qui permettent de cliquer sur les personnages -->
     <div class="npc npc1" id="npc1" onclick="paper1Appear()"></div>
     <div class="npc npc2" id="npc2" onclick="paper2Appear()"></div>
     <div class="npc npc3" id="npc3" onclick="paper3Appear()"></div>
 
+    <!-- Ce sont les images des papiers -->
     <img
       src="Images/paper1.png"
       alt="Paper1"
@@ -42,6 +44,8 @@
       id="paper"
       onclick=""
     />
+
+    <!-- Ce sont les lettres à déplacer pour former le mot Alphabet -->
     <div class="letterBox" id="letterBox">
       <div class="letterBank">
         <div
@@ -194,16 +198,17 @@
       </div>
     </div>
 
+    <!-- C'est la cinématique qui commence lorsqu'on forme le mot Alphabet -->
     <video class="vaultArrival" id="vaultArrival" muted autoplay>
       <source src="Videos/vaultArrival.mp4" />
     </video>
 
+    <!-- Ce sont les éléments pour le livre du code morse -->
     <div
       class="morseBookBox"
       id="morseBookBox"
       onclick="foundMorseBook()"
     ></div>
-
     <img
       src="Images/morseBook.gif"
       alt="morseBook"
@@ -211,7 +216,6 @@
       id="morseBook"
       onclick=""
     />
-
     <p class="morseBookExit" id="morseBookExit">
       Appuyez sur Esc pour fermer l'interface
     </p>
@@ -227,14 +231,15 @@
       class="morseBookPages"
       id="morseBookPage2"
     />
-
     <div class="page2Btn" id="page2Btn" onclick="openMorseBookPage2()"></div>
     <div class="page1Btn" id="page1Btn" onclick="openMorseBookPage1()"></div>
 
+    <!-- C'est le bouton permettant de changer de vue -->
     <div class="aerialViewBtn" id="aerialViewBtn" onclick="toggleAerialView()">
       Vue aérienne
     </div>
 
+    <!-- Ce sont les éléments pour entrer le code -->
     <p class="codeInterfaceExit" id="codeInterfaceExit">
       Appuyez sur Esc pour fermer l'interface
     </p>
@@ -247,6 +252,7 @@
       </div>
     </div>
 
+    <!-- C'est l'animation lorsqu'on fini le jeu -->
     <video class="gameComplete" id="gameComplete" muted autoplay>
       <source src="Videos/gameComplete.mp4" />
     </video>

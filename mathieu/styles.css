@@ -351,6 +351,7 @@ body {
 .codeInterface {
   background-image: url("Images/codeInterfaceBackground.png");
   background-position: center;
+  background-repeat: no-repeat;
   width: 40%;
   height: 39%;
   position: absolute;
