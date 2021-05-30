@@ -180,7 +180,8 @@ function drop(ev) {
       paper.style.display = "none";
       letterBox.style.display = "none";
       vaultArrival.play();
-    }, 2000);
+      vaultArrival.classList.remove("cinematicAnimation");
+    }, 1500);
 
     setTimeout(function () {
       morseBookBox.style.display = "block";
