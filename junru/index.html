@@ -9,235 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <style>
-      #cin1 {
-        display: fixed;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 100%;
-      }
-      body {
-        background-image: none;
-        background-size: cover;
-      }
-      #hintBook {
-        cursor: pointer;
-        display: none;
-        width: 3%;
-        height: 5%;
-        position: absolute;
-        left: 56%;
-        top: 43%;
-      }
-      #hints {
-        display: none;
-        width: 20%;
-        image-rendering: pixelated;
-        image-rendering: -moz-crisp-edges;
-        image-rendering: crisp-edges;
-      }
-      #cin2 {
-        display: none;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 100%;
-      }
-      #z {
-        display: none;
-        position: absolute;
-        width: 1.5%;
-        height: 2%;
-        left: 5%;
-        bottom: 10%;
-        text-align: center;
-        padding: auto;
-        color: white;
-        background-color: none;
-        font-family: 'Press Start 2P', cursive;
-      }
-      #c {
-        display: none;
-        position: absolute;
-        width: 1.5%;
-        height: 2%;
-        right: 5%;
-        bottom: 10%;
-        text-align: center;
-        padding: auto;
-        color: white;
-        background-color: none;
-        font-family: 'Press Start 2P', cursive;
-      }
-      #x {
-        display: none;
-      }
-      #chest1 {
-        cursor: pointer;
-        display: none;
-        width: 11%;
-        height: 6%;
-        position: absolute;
-        left: 18%;
-        top: 41%;
-      }
-      #chest2 {
-        cursor: pointer;
-        display: none;
-        width: 9%;
-        height: 6%;
-        position: absolute;
-        left: 32%;
-        top: 41%;
-      }
-      #chest3 {
-        cursor: pointer;
-        display: none;
-        width: 8%;
-        height: 6%;
-        position: absolute;
-        left: 46%;
-        top: 41%;
-      }
-      #chest4 {
-        cursor: pointer;
-        display: none;
-        width: 9%;
-        height: 6%;
-        position: absolute;
-        left: 59%;
-        top: 41%;
-      }
-      #chest5 {
-        cursor: pointer;
-        display: none;
-        width: 11%;
-        height: 6%;
-        position: absolute;
-        left: 71%;
-        top: 41%;
-      }
-      #chest6 {
-        cursor: pointer;
-        display: none;
-        width: 11%;
-        height: 6%;
-        position: absolute;
-        left: 18%;
-        top: 57%;
-      }
-      #chest7 {
-        cursor: pointer;
-        display: none;
-        width: 9%;
-        height: 6%;
-        position: absolute;
-        left: 32%;
-        top: 57%;
-      }
-      #chest8 {
-        cursor: pointer;
-        display: none;
-        width: 8%;
-        height: 6%;
-        position: absolute;
-        left: 46%;
-        top: 57%;
-      }
-      #chest9 {
-        cursor: pointer;
-        display: none;
-        width: 9%;
-        height: 6%;
-        position: absolute;
-        left: 59%;
-        top: 57%;
-      }
-      #chest10 {
-        cursor: pointer;
-        display: none;
-        width: 11%;
-        height: 6%;
-        position: absolute;
-        left: 71%;
-        top: 57%;
-      }
-      #hand {
-        display: none;
-        position: absolute;
-        width: 30%;
-        height: 30%;
-        right: 10%;
-        bottom: 0%;
-        background-image: url('./img/coffres/hand.png');
-      }
-      #inHand {
-        display: none;
-        position: absolute;
-        width: 5%;
-        height: 10%;
-        right: 25%;
-        bottom: 10%;
-        background-image: url('./img/chestItems/key.png');
-        background-size: contain;
-      }
-      #chestItem {
-        display: none;
-        position: absolute;
-        width: 17%;
-        height: 30%;
-        left: 40%;
-        top: 35%;
-        background-image: none;
-        background-size: contain;
-        pointer-events: none;
-      }
-      #key {
-        display: none;
-        position: absolute;
-        width: 17%;
-        height: 30%;
-        left: 40%;
-        top: 35%;
-        background-image: none;
-        background-size: contain;
-        pointer-events: all;
-      }
-      #key.hover {
-        display: none;
-        position: absolute;
-        width: 18%;
-        height: 30%;
-        left: 29%;
-        top: 34%;
-        background-image: none;
-        background-size: contain;
-        pointer-events: all;
-      }
-      #keyHole {
-        display: none;
-        position: absolute;
-        width: 5%;
-        height: 8%;
-        left: 45%;
-        top: 46%;
-        cursor: url('./img/coffres/lock.png'), auto;
-      }
-      #cin3 {
-        display: none;
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 100;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <video playinsline autoplay muted id="cin1">
@@ -253,16 +25,19 @@
     <div id="c">c</div>
     <div id="x">x</div>
 
-    <div id="chest1" onClick="chest1()"></div>
-    <div id="chest2" onClick="chest2()"></div>
-    <div id="chest3" onClick="chest3()"></div>
-    <div id="chest4" onClick="chest4()"></div>
-    <div id="chest5" onClick="chest5()"></div>
-    <div id="chest6" onClick="chest6()"></div>
+    <div id="chest1" onClick="chest(1, 'apple.gif', 'bow.png')"></div>
+    <div id="chest2" onClick="chest(2, 'chicken.png', 'feather.png')"></div>
+    <div id="chest3" onClick="chest(3, 'fire.png', 'gunpowder.png')"></div>
+    <div id="chest4" onClick="chest(4, 'ink.png', 'lava.png')"></div>
+    <div id="chest5" onClick="chest(5, 'minecart.png', 'paper.png')"></div>
+    <div id="chest6" onClick="chest(6, 'hoe.png', 'pearl.png')"></div>
     <div id="chest7" onClick="chest7()"></div>
-    <div id="chest8" onClick="chest8()"></div>
-    <div id="chest9" onClick="chest9()"></div>
-    <div id="chest10" onClick="chest10()"></div>
+    <div id="chest8" onClick="chest(8, 'rocket.png', 'star.gif')"></div>
+    <div id="chest9" onClick="chest(9, 'stew.png', 'totem.png')"></div>
+    <div
+      id="chest10"
+      onClick="chest(10, 'bucket.png', 'chestplate.png');"
+    ></div>
 
     <div id="chestItem"></div>
 
@@ -276,6 +51,8 @@
       <source src="./vid/3cin.mp4" type="video/mp4" />
     </video>
 
+    <div id="black"></div>
+
     <script>
       document.addEventListener('keydown', keyboard);
       setTimeout(elimVid, 8000);
@@ -286,10 +63,13 @@
       function findHints() {
         document.body.style.backgroundImage =
           'url("./img/invBridge/findHints.png")';
-        document.getElementById('hintBook').style.display = 'flex';
+        document.getElementById('hintBook').style.display = 'block';
       }
       function hints() {
-        document.getElementById('hints').style.display = 'flex';
+        var book = new Audio();
+        book.src = './sounds/open_book.mp3';
+        book.play();
+        document.getElementById('hints').style.display = 'block';
         setTimeout(invPath, 1000);
       }
 
@@ -343,6 +123,18 @@
         'd',
         'w',
       ];
+      let chestArray = [
+        'chest1',
+        'chest2',
+        'chest3',
+        'chest4',
+        'chest5',
+        'chest6',
+        'chest7',
+        'chest8',
+        'chest9',
+        'chest10',
+      ];
       var currentStepIndex = 0;
       var whichRoom = 0;
       function invPath() {
@@ -364,6 +156,9 @@
           }
         } else {
           if (whichRoom === 0) {
+            var burn = new Audio();
+            burn.src = './sounds/fire.mp3';
+            burn.play();
             console.log('recommencer');
 
             document.body.style.backgroundImage = 'url("./img/inLava/1.png")';
@@ -408,7 +203,10 @@
       var vid = document.getElementById('cin2');
 
       function playVid() {
-        document.getElementById('cin2').style.display = 'flex';
+        var door = new Audio();
+        door.src = './sounds/door_open.mp3';
+        door.play();
+        document.getElementById('cin2').style.display = 'block';
         vid.play();
         console.log(vid);
         setTimeout(function () {
@@ -416,211 +214,71 @@
         }, 10000);
         document.body.style.backgroundImage =
           'url("./img/coffres/coffresMid.png")';
-        document.getElementById('z').style.display = 'flex';
-        document.getElementById('c').style.display = 'flex';
-        document.getElementById('hand').style.display = 'flex';
+        document.getElementById('z').style.display = 'block';
+        document.getElementById('c').style.display = 'block';
+        document.getElementById('hand').style.display = 'block';
       }
       var chestSide = 0;
       function changeChest(key) {
         if (key === 'z') {
           document.body.style.backgroundImage =
             'url("./img/coffres/coffresGauche.png")';
-          document.getElementById('chest1').style.display = 'flex';
-          document.getElementById('chest2').style.display = 'flex';
-          document.getElementById('chest3').style.display = 'flex';
-          document.getElementById('chest4').style.display = 'flex';
-          document.getElementById('chest5').style.display = 'flex';
-          document.getElementById('chest6').style.display = 'flex';
-          document.getElementById('chest7').style.display = 'flex';
-          document.getElementById('chest8').style.display = 'flex';
-          document.getElementById('chest9').style.display = 'flex';
-          document.getElementById('chest10').style.display = 'flex';
+          chestArray.forEach(function (chest) {
+            document.getElementById(chest).style.display = 'block';
+          });
           document.getElementById('z').style.display = 'none';
-          document.getElementById('c').style.display = 'flex';
+          document.getElementById('c').style.display = 'block';
           chestSide = 1;
         }
-
         if (key === 'c') {
           document.body.style.backgroundImage =
             'url("./img/coffres/coffresDroite.png")';
-          document.getElementById('chest1').style.display = 'flex';
-          document.getElementById('chest2').style.display = 'flex';
-          document.getElementById('chest3').style.display = 'flex';
-          document.getElementById('chest4').style.display = 'flex';
-          document.getElementById('chest5').style.display = 'flex';
-          document.getElementById('chest6').style.display = 'flex';
-          document.getElementById('chest7').style.display = 'flex';
-          document.getElementById('chest8').style.display = 'flex';
-          document.getElementById('chest9').style.display = 'flex';
-          document.getElementById('chest10').style.display = 'flex';
+          chestArray.forEach(function (chest) {
+            document.getElementById(chest).style.display = 'block';
+          });
           document.getElementById('c').style.display = 'none';
-          document.getElementById('z').style.display = 'flex';
+          document.getElementById('z').style.display = 'block';
 
           chestSide = 2;
         }
         if (key === 'x') {
           document.body.style.backgroundImage =
             'url("./img/coffres/coffresMid.png")';
-          document.getElementById('chest1').style.display = 'none';
-          document.getElementById('chest2').style.display = 'none';
-          document.getElementById('chest3').style.display = 'none';
-          document.getElementById('chest4').style.display = 'none';
-          document.getElementById('chest5').style.display = 'none';
-          document.getElementById('chest6').style.display = 'none';
-          document.getElementById('chest7').style.display = 'none';
-          document.getElementById('chest8').style.display = 'none';
-          document.getElementById('chest9').style.display = 'none';
-          document.getElementById('chest10').style.display = 'none';
-          document.getElementById('z').style.display = 'flex';
-          document.getElementById('c').style.display = 'flex';
+          chestArray.forEach(function (chest) {
+            document.getElementById(chest).style.display = 'none';
+          });
+          document.getElementById('z').style.display = 'block';
+          document.getElementById('c').style.display = 'block';
           chestSide = 0;
         }
       }
-      function chest1() {
+
+      function chest(chestNumber, imgide1, imgide2) {
         if (chestSide === 1) {
+          var chest = new Audio('./sounds/open_chest.mp3');
+          chest.play();
           console.log(chestSide);
-          console.log('chest1');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/apple.gif")';
+          console.log('chest' + chestNumber);
+          document.getElementById('chestItem').style.display = 'block';
+          document.getElementById(
+            'chestItem',
+          ).style.backgroundImage = `url("./img/chestItems/${imgide1}")`;
           setTimeout(function () {
             document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
+          }, 2000);
         }
         if (chestSide === 2) {
+          var chest = new Audio('./sounds/open_chest.mp3');
+          chest.play();
           console.log(chestSide);
-          console.log('chest1');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/bow.png")';
+          console.log('chest' + chestNumber);
+          document.getElementById('chestItem').style.display = 'block';
+          document.getElementById(
+            'chestItem',
+          ).style.backgroundImage = `url("./img/chestItems/${imgide2}")`;
           setTimeout(function () {
             document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest2() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest2');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/chicken.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest2');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/feather.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest3() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest3');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/fire.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest3');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/gunpowder.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest4() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest4');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/ink.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest4');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/lava.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest5() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest5');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/minecart.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest5');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/paper.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest6() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest6');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/hoe.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest6');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/pearl.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
+          }, 2000);
         }
         if (chestSide === 0) {
           console.log(chestSide);
@@ -628,19 +286,23 @@
       }
       function chest7() {
         if (chestSide === 1) {
+          var chest = new Audio('./sounds/open_chest.mp3');
+          chest.play();
           console.log(chestSide);
           console.log('chest7');
-          document.getElementById('chestItem').style.display = 'flex';
+          document.getElementById('chestItem').style.display = 'block';
           document.getElementById('chestItem').style.backgroundImage =
             'url("./img/chestItems/potato.png")';
           setTimeout(function () {
             document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
+          }, 2000);
         }
         if (chestSide === 2) {
+          var chest = new Audio('./sounds/open_chest.mp3');
+          chest.play();
           console.log(chestSide);
           console.log('chest7');
-          document.getElementById('key').style.display = 'flex';
+          document.getElementById('key').style.display = 'block';
           document.getElementById('key').style.backgroundImage =
             'url("./img/chestItems/key.png")';
           setTimeout(function () {
@@ -651,139 +313,38 @@
           console.log(chestSide);
         }
       }
-      function chest8() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest8');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/rocket.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest8');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/star.gif")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest9() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest9');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/stew.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest9');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/totem.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
-      function chest10() {
-        if (chestSide === 1) {
-          console.log(chestSide);
-          console.log('chest10');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/bucket.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 2) {
-          console.log(chestSide);
-          console.log('chest10');
-          document.getElementById('chestItem').style.display = 'flex';
-          document.getElementById('chestItem').style.backgroundImage =
-            'url("./img/chestItems/chestplate.png")';
-          setTimeout(function () {
-            document.getElementById('chestItem').style.backgroundImage = 'none';
-          }, 5000);
-        }
-        if (chestSide === 0) {
-          console.log(chestSide);
-        }
-      }
+
       function theKey() {
+        var key = new Audio();
+        key.src = './sounds/icechime.mp3';
+        key.play();
+
         document.body.style.cursor =
           'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest1').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest2').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest3').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest4').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest5').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest6').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest7').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest8').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest9').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
-        document.getElementById('chest10').style.cursor =
-          'url("./img/chestItems/keyCursor.png"),auto';
+        chestArray.forEach(function (chest) {
+          document.getElementById(chest).style.cursor =
+            'url("./img/chestItems/keyCursor.png"),auto';
+        });
         document.getElementById('key').style.display = 'none';
         document.getElementById('chest7').style.display = 'none';
       }
       function keyOnHand() {
         document.body.style.cursor = 'auto';
-        document.getElementById('inHand').style.display = 'flex';
-        document.getElementById('chest1').style.cursor = 'auto';
-        document.getElementById('chest2').style.cursor = 'auto';
-        document.getElementById('chest3').style.cursor = 'auto';
-        document.getElementById('chest4').style.cursor = 'auto';
-        document.getElementById('chest5').style.cursor = 'auto';
-        document.getElementById('chest6').style.cursor = 'auto';
-        document.getElementById('chest7').style.cursor = 'auto';
-        document.getElementById('chest8').style.cursor = 'auto';
-        document.getElementById('chest9').style.cursor = 'auto';
-        document.getElementById('chest10').style.cursor = 'auto';
+        document.getElementById('inHand').style.display = 'block';
+        chestArray.forEach(function (chest) {
+          document.getElementById(chest).style.cursor = 'auto';
+        });
         setTimeout(door(), 1000);
       }
       function door() {
-        document.getElementById('chest1').style.display = 'none';
-        document.getElementById('chest2').style.display = 'none';
-        document.getElementById('chest3').style.display = 'none';
-        document.getElementById('chest4').style.display = 'none';
-        document.getElementById('chest5').style.display = 'none';
-        document.getElementById('chest6').style.display = 'none';
-        document.getElementById('chest7').style.display = 'none';
-        document.getElementById('chest8').style.display = 'none';
-        document.getElementById('chest9').style.display = 'none';
-        document.getElementById('chest10').style.display = 'none';
+        chestArray.forEach(function (chest) {
+          document.getElementById(chest).style.display = 'none';
+        });
         document.getElementById('z').style.display = 'none';
         document.getElementById('c').style.display = 'none';
-
         document.body.style.backgroundImage =
           'url("./img/coffres/coffresMidPorte.png")';
-        document.getElementById('keyHole').style.display = 'flex';
+        document.getElementById('keyHole').style.display = 'block';
       }
       function unlock() {
         console.log('unlock');
@@ -795,14 +356,19 @@
       var vid2 = document.getElementById('cin3');
 
       function freedom() {
+        var door = new Audio();
+        door.src = './sounds/door_open.mp3';
+        door.play();
         document.body.style.cursor = 'auto';
-        document.getElementById('cin3').style.display = 'flex';
+        document.getElementById('cin3').style.display = 'block';
         vid2.play();
         console.log(vid);
         setTimeout(function () {
-          document.body.style.backgroundImage =
-            'url("./img/coffres/black.png")';
+          document.getElementById('black').style.display = 'block';
         }, 7000);
+        setTimeout(function () {
+          window.parent.nextPerson();
+        }, 8000);
       }
     </script>
   </body>
