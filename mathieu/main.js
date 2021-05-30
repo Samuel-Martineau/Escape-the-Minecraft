@@ -202,7 +202,7 @@ function drop(ev) {
       enteredSecondLevel = true;
       aerialViewBtn.style.display = "block";
 
-      console.log("Énigme 2: Entrez le code ADIMRT en appuyant sur le lutrin");
+      console.log("Énigme 2: Entrez le code AEIMST en appuyant sur le lutrin");
     }, 18000);
   }
 }
