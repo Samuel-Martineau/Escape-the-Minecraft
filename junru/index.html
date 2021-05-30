@@ -179,10 +179,10 @@
       #inHand {
         display: none;
         position: absolute;
-        width: 50%;
-        height: 75%;
-        left: 10%;
-        top: 20%;
+        width: 5%;
+        height: 10%;
+        right: 25%;
+        bottom: 10%;
         background-image: url('./img/chestItems/key.png');
         background-size: contain;
       }
@@ -507,7 +507,7 @@
           console.log('chest2');
           document.getElementById('chestItem').style.display = 'flex';
           document.getElementById('chestItem').style.backgroundImage =
-            'url(""./img/chestItems/chicken.png")';
+            'url("./img/chestItems/chicken.png")';
           setTimeout(function () {
             document.getElementById('chestItem').style.backgroundImage = 'none';
           }, 5000);
@@ -795,9 +795,14 @@
       var vid2 = document.getElementById('cin3');
 
       function freedom() {
+        document.body.style.cursor = 'auto';
         document.getElementById('cin3').style.display = 'flex';
         vid2.play();
         console.log(vid);
+        setTimeout(function () {
+          document.body.style.backgroundImage =
+            'url("./img/coffres/black.png")';
+        }, 7000);
       }
     </script>
   </body>
