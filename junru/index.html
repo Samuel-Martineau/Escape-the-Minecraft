@@ -64,41 +64,42 @@
         document.body.style.backgroundImage =
           'url("./img/invBridge/findHints.png")';
         document.getElementById('hintBook').style.display = 'block';
+        console.log('1. Clicker sur le livre.');
       }
       function hints() {
         var book = new Audio();
         book.src = './sounds/open_book.mp3';
         book.play();
+        document.getElementById('hintBook').style.display = 'none';
         document.getElementById('hints').style.display = 'block';
         setTimeout(invPath, 1000);
+        console.log(
+          '2. Suivre les instructions en utilisant les touches correspondantes du clavier.',
+        );
+        console.log(
+          '3. Si vous mourrez, vous allez être transporté vers le début du pont invisible.',
+        );
       }
 
       function keyboard(e) {
         e.preventDefault();
-        console.log(e.keyCode);
         if (e.keyCode == 87) {
           checkStep('w');
-          console.log('W');
         }
         if (e.keyCode == 65) {
           checkStep('a');
-          console.log('A');
         }
         if (e.keyCode == 68) {
           checkStep('d');
-          console.log('D');
         }
         if (e.keyCode == 90) {
           changeChest('z');
-          console.log('Z');
         }
         if (e.keyCode == 88) {
           changeChest('x');
-          console.log('X');
         }
         if (e.keyCode == 67) {
           changeChest('c');
-          console.log('C');
         }
       }
       var steps = [
@@ -142,8 +143,9 @@
       }
       function checkStep(key) {
         if (key === steps[currentStepIndex]) {
-          console.log('ok: ' + key);
           if (currentStepIndex <= steps.length) {
+            var move = new Audio('./sounds/hit4.mp3');
+            move.play();
             currentStepIndex++;
             document.body.style.backgroundImage = `url(./img/invBridge/${currentStepIndex}.png)`;
             if (currentStepIndex == steps.length) {
@@ -159,7 +161,6 @@
             var burn = new Audio();
             burn.src = './sounds/fire.mp3';
             burn.play();
-            console.log('recommencer');
 
             document.body.style.backgroundImage = 'url("./img/inLava/1.png")';
             setTimeout(function () {
@@ -208,7 +209,6 @@
         door.play();
         document.getElementById('cin2').style.display = 'block';
         vid.play();
-        console.log(vid);
         setTimeout(function () {
           document.getElementById('cin2').style.display = 'none';
         }, 10000);
@@ -217,6 +217,12 @@
         document.getElementById('z').style.display = 'block';
         document.getElementById('c').style.display = 'block';
         document.getElementById('hand').style.display = 'block';
+        console.log(
+          '4. Peser sur Z pour aller à gauche et sur C pour aller à droite',
+        );
+        console.log(
+          "5. Clicker sur les coffres et attendre que l'item disparaisse pour clicker sur un autre coffre. Le but est de trouver la clé.",
+        );
       }
       var chestSide = 0;
       function changeChest(key) {
@@ -257,8 +263,6 @@
         if (chestSide === 1) {
           var chest = new Audio('./sounds/open_chest.mp3');
           chest.play();
-          console.log(chestSide);
-          console.log('chest' + chestNumber);
           document.getElementById('chestItem').style.display = 'block';
           document.getElementById(
             'chestItem',
@@ -270,8 +274,6 @@
         if (chestSide === 2) {
           var chest = new Audio('./sounds/open_chest.mp3');
           chest.play();
-          console.log(chestSide);
-          console.log('chest' + chestNumber);
           document.getElementById('chestItem').style.display = 'block';
           document.getElementById(
             'chestItem',
@@ -281,15 +283,12 @@
           }, 2000);
         }
         if (chestSide === 0) {
-          console.log(chestSide);
         }
       }
       function chest7() {
         if (chestSide === 1) {
           var chest = new Audio('./sounds/open_chest.mp3');
           chest.play();
-          console.log(chestSide);
-          console.log('chest7');
           document.getElementById('chestItem').style.display = 'block';
           document.getElementById('chestItem').style.backgroundImage =
             'url("./img/chestItems/potato.png")';
@@ -300,17 +299,17 @@
         if (chestSide === 2) {
           var chest = new Audio('./sounds/open_chest.mp3');
           chest.play();
-          console.log(chestSide);
-          console.log('chest7');
           document.getElementById('key').style.display = 'block';
           document.getElementById('key').style.backgroundImage =
             'url("./img/chestItems/key.png")';
           setTimeout(function () {
             document.getElementById('key').style.backgroundImage = 'none';
           }, 5000);
+          console.log(
+            '6. Quand vous trouvez la clé, clicker dessus, elle sera votre curseur, et la déposer sur la main en clickant dessus.',
+          );
         }
         if (chestSide === 0) {
-          console.log(chestSide);
         }
       }
 
@@ -345,9 +344,14 @@
         document.body.style.backgroundImage =
           'url("./img/coffres/coffresMidPorte.png")';
         document.getElementById('keyHole').style.display = 'block';
+        console.log(
+          '7. Si vous flottiez votre pointer au dessus de la poignée de la porte, le curseur deviendra un cadenas.',
+        );
+        console.log(
+          '8. Prendre la clé em clickant dessus, le curseur se changera en clé, et clicker sur le cadenas.',
+        );
       }
       function unlock() {
-        console.log('unlock');
         document.body.style.cursor =
           'url("./img/chestItems/keyCursor.png"), auto';
         document.getElementById('inHand').style.display = 'none';
@@ -356,13 +360,11 @@
       var vid2 = document.getElementById('cin3');
 
       function freedom() {
-        var door = new Audio();
-        door.src = './sounds/door_open.mp3';
-        door.play();
+        var unlock = new Audio('./sounds/open4.mp3');
+        unlock.play();
         document.body.style.cursor = 'auto';
         document.getElementById('cin3').style.display = 'block';
         vid2.play();
-        console.log(vid);
         setTimeout(function () {
           document.getElementById('black').style.display = 'block';
         }, 7000);
