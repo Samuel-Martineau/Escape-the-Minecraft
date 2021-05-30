@@ -180,6 +180,7 @@ function drop(ev) {
       paper.style.display = "none";
       letterBox.style.display = "none";
       vaultArrival.play();
+      vaultArrival.classList.remove("cinematicAnimation");
     }, 2000);
 
     setTimeout(function () {
