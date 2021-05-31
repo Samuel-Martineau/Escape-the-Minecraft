@@ -163,6 +163,7 @@ body {
   right: 10%;
   bottom: 0%;
   background-image: url('./img/coffres/hand.png');
+  pointer-events: none;
 }
 #inHand {
   display: none;
